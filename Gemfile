@@ -51,3 +51,6 @@ gem 'active_model_serializers', '~> 0.10.12'
 
   # This gem allows developers to process images
 gem "image_processing", ">= 1.2"
+
+  # Enables backend API calling
+gem 'rest-client', '~> 2.1'
