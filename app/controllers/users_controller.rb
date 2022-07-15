@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
+    skip_before_action :authorized
+    wrap_parameters format: []
+
     def index
-        users = User.all()
+        users = User.all
         render json: users
     end
 
@@ -13,10 +16,11 @@ class UsersController < ApplicationController
         end
     end
 
-    def create_user
-        new_user = User.create(user_params)
-        if new_user.valid?
-            render json: new_user, status: :created
+    def create
+        user = User.create(user_params)
+        if user.valid?
+            session[:user_id] ||= user.id
+            render json: user, status: :created
         else
             render json: {error: user.errors.full_messages }, status: :unprocessable_entity
         end
@@ -26,7 +30,7 @@ class UsersController < ApplicationController
         currentUser = User.find_by(id: session[:id])
         if currentUser
             currentUser.update(user_update_params)
-
+        end
     end
 
     def destroy
@@ -41,10 +45,10 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :phone, :username, :password)
+        params.permit(:first_name, :last_name, :email, :phone, :username, :password)
     end
 
     def user_update_params
-        params.require(:user).permit(:first_name, :last_name, :phone, :password)
+        params.permit(:first_name, :last_name, :phone, :password)
     end
 end

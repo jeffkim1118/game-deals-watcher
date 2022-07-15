@@ -2,9 +2,16 @@ Rails.application.routes.draw do
   resources :games
   resources :wishlists
   resources :users
+  resources :sessions
   
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/login', to: "sessions#create"
+  post "/login", to: "sessions#create"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Register new user
+  post '/users', to: "users#create"
+
+  delete '/logout', to: "sessions#destroy"
+
+  get '/me', to: "users#show"
+
 end
