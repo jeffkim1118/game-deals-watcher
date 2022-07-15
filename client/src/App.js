@@ -5,7 +5,11 @@ import Navbar from './components/Navbar.js';
 function App() {
   return (
     <div>
-        <Navbar />
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
