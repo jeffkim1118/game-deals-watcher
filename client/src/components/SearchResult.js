@@ -1,7 +1,7 @@
 import React from 'react';
 
-function SearchResult({result}){
-    
+function SearchResult({searchResult}){
+    console.log(searchResult)
     return(
         <div>
             <h1>hello</h1>

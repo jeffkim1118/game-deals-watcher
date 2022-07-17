@@ -11,7 +11,8 @@ import SearchResult from './components/SearchResult';
 
 function App() {
   const [currentUser, setCurrentUser] = useState();  
-  
+  const [searchResult, setResult] = useState();
+
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if(r.ok){
@@ -24,12 +25,12 @@ function App() {
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} />}/>
+        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/> }/>
         <Route path="/browse" element={<Browse />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>
         <Route path="/search" element={<Search />}/>
-        <Route path="/searchresult" element={<SearchResult />}/>
+        <Route path="/searchresult" element={<SearchResult searchResult={searchResult}/>}/>
       </Routes>
     </div>
   );

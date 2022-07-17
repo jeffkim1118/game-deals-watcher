@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register({setCurrentUser}){
     const[first_name, setFirstName] = useState('')
@@ -7,6 +8,9 @@ export default function Register({setCurrentUser}){
     const[phone, setPhone] = useState('')
     const[username, setUsername] = useState('')
     const[password, setPassword] = useState('')
+    const[registeredStatus, setRegisteredStatus] = useState()
+
+    let navigate = useNavigate();
 
     function handleRegister(e){
         e.preventDefault();
@@ -18,7 +22,10 @@ export default function Register({setCurrentUser}){
             username,
             password
         }
-        if(newUser.phone===''){
+
+        if(newUser.first_name === '' || newUser.last_name==='' || newUser.email==='' || username==='' || password===''){
+            setRegisteredStatus(false)
+        }else if(newUser.phone===''){
             fetch(`/users`, {
                 method: 'POST',
                 headers: {
@@ -35,6 +42,7 @@ export default function Register({setCurrentUser}){
             })
             .then((r)=>{
                 if(r.ok){r.json().then((loggedin)=>setCurrentUser(loggedin))}
+                navigate('/')
             })
         }else{
             fetch(`/users`, {
@@ -44,6 +52,7 @@ export default function Register({setCurrentUser}){
             })
             .then((r)=>{
                 if(r.ok){r.json().then((loggedin)=>setCurrentUser(loggedin))}
+                navigate('/')
             })
         }
     }
@@ -51,6 +60,8 @@ export default function Register({setCurrentUser}){
     return(
         <div>
             <form onSubmit={handleRegister}>
+                <h1>Register</h1>
+                {registeredStatus===false? <p>Registration failed. Please enter valid information.</p> : null}
                 <input placeholder='First name' value={first_name} onChange={(e)=>setFirstName(e.target.value)}></input>
                 <input placeholder='Last name' value={last_name} onChange={(e)=>setLastName(e.target.value)}></input>
                 <input placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>

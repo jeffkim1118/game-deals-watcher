@@ -11,14 +11,15 @@ function Search({setSearchResult}){
                 r.json().then((result)=> setSearchResult(result))
             }
         })
+        
     }
  
     return(
-        <div>
+        <div className='searchByTitle-container'>
             <div className='SearchByGameName'>
                 <form onSubmit={handleSearch}>
-                    <input className='SearchByGameNameBar' value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)}></input>
-                    <button type="submit">Search</button>
+                    <input className='SearchByGameNameBar' value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} placeholder="Search A Title"></input>
+                    <button className='searchBtn' type="submit">Search</button>
                 </form>              
             </div>
         </div>

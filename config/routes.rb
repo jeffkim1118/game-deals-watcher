@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # Register new user
   post '/users', to: "users#create"
-
+  # Logout user
   delete '/logout', to: "sessions#destroy"
 
   get '/me', to: "users#show"

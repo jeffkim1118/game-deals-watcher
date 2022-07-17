@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Topdeal(){
     const[topDealsList, setTopDeals] = useState([])
 
     useEffect(() => {
-        fetch(`https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=35&pageSize=20`)
+        fetch(`https://www.cheapshark.com/api/1.0/deals?storeID=1&lowerPrice=20&pageSize=10&AAA=true`)
         .then((r) => r.json())
         .then(topDealsGames => setTopDeals(topDealsGames))
     }, [])
@@ -17,21 +20,40 @@ export default function Topdeal(){
         }
     }
 
+    const settings = {
+        infinite: true,
+        dots: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        lazyLoad: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        centerMode: true,
+        focusOnSelect: true,
+    };
+
+    function redirectToDeal(e,singleDeal){
+        e.preventDefault();
+        window.open(`https://www.cheapshark.com/redirect?dealID=${singleDeal}`, '_blank');
+        return null;
+    }
+
     return(
-        <div>
-            {result.map((singleDeal)=> {
-                return (
-                    <div>
-                        <div className="single_game" key={result}>
-                            <img src={singleDeal.thumb} alt="Game-img"/><br/>
-                            <span>{singleDeal.title}</span><br/>
-                            <span>{Math.round(singleDeal.savings)}% Off</span><br/>
-                            <span>Price: <s>${singleDeal.normalPrice}</s> ${singleDeal.salePrice}</span><br/>
-                            <span>Meta Critics Score: {singleDeal.metacriticScore}</span>
-                        </div>                    
+        <div className='games-list'>
+            <h1>Top Deals</h1>     
+            <Slider {...settings}>
+                {result.map((singleDeal)=> (
+                    <div className="list-container" key={singleDeal}>
+                        <div className="single_game">
+                            <img src={singleDeal.thumb} onClick={(e)=>redirectToDeal(e,singleDeal.dealID)} className="game-img" alt="Game-img"/><br/>
+                            <strong><span className='game-info'>{singleDeal.title}</span><br/></strong>
+                            <strong><span className='game-info'>{Math.round(singleDeal.savings)}% Off</span></strong><br/>
+                            <span className='game-info'>Price: <s>${singleDeal.normalPrice}</s> <strong>${singleDeal.salePrice}</strong></span><br/>
+                            <span className='game-info'>Meta Critics Score: {singleDeal.metacriticScore}</span>
+                        </div>                  
                     </div>
-                )
-            })}
+                ))}               
+            </Slider>
         </div>
     )
 }
