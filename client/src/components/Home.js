@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import { Parallax } from 'react-parallax';
 import Search from './Search';
 import Topdeals from './Topdeals';
+import DealsByStores from './DealsByStores';
 import IMAGES from '../images/Image';
 
 function Home({currentUser, setResult}){
@@ -28,7 +29,7 @@ function Home({currentUser, setResult}){
             <div className='home-search'>
                 <div className='search-container'>
                     <h1>Save More On Games</h1>
-                    <Search setSearchResult={setSearchResult} />
+                    <Search setSearchResult={setSearchResult} searchResult={searchResult} />
                 </div>      
             </div>  
 
@@ -45,10 +46,7 @@ function Home({currentUser, setResult}){
               
             {searchResult ? navigate('/searchresult') : (<Topdeals />)}
             
-
-            <div>
-               
-            </div>
+            <DealsByStores />
         </div>
     )
 }

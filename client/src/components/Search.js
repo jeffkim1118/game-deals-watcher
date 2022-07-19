@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-function Search({setSearchResult}){
+function Search({setSearchResult, searchResult}){
     const[searchQuery, setSearchQuery] = useState('');
+    const[filteredData, setFilteredData] = useState([]);
 
     const handleSearch=(e)=>{
         e.preventDefault();
@@ -10,8 +11,7 @@ function Search({setSearchResult}){
             if(r.ok){
                 r.json().then((result)=> setSearchResult(result))
             }
-        })
-        
+        })      
     }
  
     return(
@@ -20,7 +20,16 @@ function Search({setSearchResult}){
                 <form onSubmit={handleSearch}>
                     <input className='SearchByGameNameBar' value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} placeholder="Search A Title"></input>
                     <button className='searchBtn' type="submit">Search</button>
-                </form>              
+                </form>
+                {filteredData.length != 0 && (
+                <div className='dataResult'>
+                    {searchResult.map((value) => {
+                        return <a className='dataItem' href={`https://www.cheapshark.com/redirect?dealID=${value.dealID}`} target="_blank"> 
+                            <p>{value.title}</p>
+                        </a>
+                    })}
+                </div>  
+                )}            
             </div>
         </div>
     )
