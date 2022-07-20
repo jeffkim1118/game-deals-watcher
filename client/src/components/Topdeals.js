@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function Topdeal(){
+export default function Topdeal({currentUser}){
     const[topDealsList, setTopDeals] = useState([])
 
     useEffect(() => {
@@ -27,14 +27,14 @@ export default function Topdeal(){
         slidesToScroll: 1,
         lazyLoad: true,
         autoplay: true,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 4000,
         centerMode: true,
         focusOnSelect: true,
     };
 
     function redirectToDeal(e,singleDeal){
         e.preventDefault();
-        window.open(`https://www.cheapshark.com/redirect?dealID=${singleDeal}`, '_blank');
+        window.open(`https://www.cheapshark.com/redirect?pageSize=10&dealID=${singleDeal}`, '_blank');
         return null;
     }
 
@@ -49,7 +49,8 @@ export default function Topdeal(){
                             <strong><span className='game-info'>{singleDeal.title}</span><br/></strong>
                             <strong><span className='game-info'>{Math.round(singleDeal.savings)}% Off</span></strong><br/>
                             <span className='game-info'>Price: <s>${singleDeal.normalPrice}</s> <strong>${singleDeal.salePrice}</strong></span><br/>
-                            <span className='game-info'>Meta Critics Score: {singleDeal.metacriticScore}</span>
+                            <span className='game-info'>Meta Critics Score: {singleDeal.metacriticScore}</span><br/>
+                            {currentUser ? <button>Add to my wishlist</button> : null}
                         </div>                  
                     </div>
                 ))}               

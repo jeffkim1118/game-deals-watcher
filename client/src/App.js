@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Routes,  Route} from "react-router-dom";
+import { Routes,  Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home';
-import Search from './components/Search';
 import Browse from './components/Browse';
 import SearchResult from './components/SearchResult';
 
@@ -25,13 +24,13 @@ function App() {
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/> }/>
-        <Route path="/browse" element={<Browse />}/>
+        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/> } exact/>
+        <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>
-        <Route path="/search" element={<Search />}/>
-        <Route path="/searchresult" element={<SearchResult searchResult={searchResult}/>}/>
+        <Route path="/searchresult" element={<SearchResult searchResult={searchResult} currentUser={currentUser} />}/>
       </Routes>
+
     </div>
   );
 }

@@ -59,15 +59,15 @@ export default function Register({setCurrentUser}){
 
     return(
         <div>
-            <form onSubmit={handleRegister}>
+            <form className="mb-3" onSubmit={handleRegister}>
                 <h1>Register</h1>
-                {registeredStatus===false? <p>Registration failed. Please enter valid information.</p> : null}
-                <input placeholder='First name' value={first_name} onChange={(e)=>setFirstName(e.target.value)}></input>
-                <input placeholder='Last name' value={last_name} onChange={(e)=>setLastName(e.target.value)}></input>
-                <input placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
-                <input placeholder='Phone (Optional)' value={phone} onChange={(e)=>setPhone(e.target.value)}></input>
-                <input placeholder='username' value={username} onChange={(e)=>setUsername(e.target.value)}></input>
-                <input placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+                {registeredStatus===false? <div className="alert alert-danger" role="alert">Sign up failed, Please enter necessary info!</div> : null}
+                <input className="form-control" id="floatingInputValue" placeholder='First name' value={first_name} onChange={(e)=>setFirstName(e.target.value)}></input>
+                <input className="form-control" id="floatingInputValue" placeholder='Last name' value={last_name} onChange={(e)=>setLastName(e.target.value)}></input>
+                <input className="form-control" id="floatingInputValue" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+                <input className="form-control" id="floatingInputValue" placeholder='Phone (Optional)' value={phone} onChange={(e)=>setPhone(e.target.value)}></input>
+                <input className="form-control" id="floatingInputValue" placeholder='username' value={username} onChange={(e)=>setUsername(e.target.value)}></input>
+                <input className="form-control" id="floatingInputValue" placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
                 <button type='submit'>Submit</button>
             </form>
         </div>

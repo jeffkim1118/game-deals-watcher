@@ -29,18 +29,17 @@ export default function Login({setCurrentUser}){
                 setLoggedinStatus(false)
             }
         })
-        .catch(err => console.log(err))
-        
+        .catch(err => console.log(err)) 
     }
 
     return(
         <div>
             
-            <form onSubmit={handleSubmit}>
+            <form className="mb-3" onSubmit={handleSubmit}>
                 <h1>Login</h1>
-                {loggedin===false ? <p>Login failed! Please check your credentials again.</p> : null}
-                <input className='username' value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username' type='username'></input>
-                <input className='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password' type='password'></input>
+                {loggedin===false ? <div className="alert alert-danger" role="alert">Login Failed! Please check your credential again.</div> : null}           
+                <input type="username" className='form-control' id="floatingInputValue" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username' ></input>           
+                <input type="password" className='form-control' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password' ></input>
                 <button type='submit'>Login</button>
             </form>
         </div>

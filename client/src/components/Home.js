@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
-import { Parallax } from 'react-parallax';
-import Search from './Search';
+import Searchbar from './Searchbar';
 import Topdeals from './Topdeals';
-import DealsByStores from './DealsByStores';
 import IMAGES from '../images/Image';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home({currentUser, setResult}){
     const [searchResult, setSearchResult] = useState();
     setResult(searchResult)
-    let navigate = useNavigate();
 
+    let navigate = useNavigate();
+    
     const settings = {
         infinite: true,
         slidesToShow: 1,
@@ -23,13 +23,12 @@ function Home({currentUser, setResult}){
         pauseOnFocus: false
     };
 
-
     return(
         <div className='header'>
             <div className='home-search'>
                 <div className='search-container'>
                     <h1>Save More On Games</h1>
-                    <Search setSearchResult={setSearchResult} searchResult={searchResult} />
+                    <Searchbar setSearchResult={setSearchResult} />
                 </div>      
             </div>  
 
@@ -42,11 +41,14 @@ function Home({currentUser, setResult}){
                 <div className='img-container'><img src={ IMAGES.background4} alt='' className='backgroundIMG'/></div>
                 </Slider>
             </div>
-            
-              
-            {searchResult ? navigate('/searchresult') : (<Topdeals />)}
-            
-            <DealsByStores />
+
+            <Topdeals currentUser={currentUser}/>
+
+            {searchResult ? navigate('/searchresult') : null}
+
+            <div className='footer'>
+
+            </div>
         </div>
     )
 }

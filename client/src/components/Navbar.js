@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Search from "./Search"
 
-export default function Navbar({currentUser, setCurrentUser}){
+export default function Navbar({currentUser, setCurrentUser, searchResult}){
 
 
     function handleLogoutClick(){
@@ -25,8 +24,7 @@ export default function Navbar({currentUser, setCurrentUser}){
                             <Link className="link" to="/" >Home</Link>           
                             <Link className="link" to="/browse">Browse</Link>
                             <Link className="link" to="/whishlist">Wishlist</Link>
-                            <Link className="link" to="/profile">Profile</Link>
-                            <Search />
+                            <Link className="link" to="/profile">Profile</Link>                      
                             <p className='profile-username'>{currentUser.username}</p>
                             <button className='log_out_btn' onClick={handleLogoutClick}>Logout</button>
                         </div>
@@ -36,7 +34,6 @@ export default function Navbar({currentUser, setCurrentUser}){
                             <Link className="link" to="/browse">Browse</Link>
                             <Link className="link" to="/signup">Sign Up</Link>
                             <Link className="link" to="/login">Login</Link>
-                            <Search />
                         </div>
                     )}
                 </div>
