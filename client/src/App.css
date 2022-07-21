@@ -165,3 +165,7 @@ body{
     width: 30px;
     height: 30px;
 }
+.profile-username{
+    font-size: 20px;
+    color: aliceblue;
+}

@@ -18,7 +18,7 @@ function SearchResult({searchResult, currentUser}){
             <h1>Your Search Result</h1>
             {searchResult ?            
             <div className='search-result'>           
-                {searchResult.map((x) => <div className="result-container" key={x}><div>
+                {searchResult.map((x) => <div className="result-container" key={x.gameID}><div>
                     <img className='thumbnail_pic' src={x.thumb} alt='game-img'/>
                     <p>{x.external}</p>
                     <span>Cheapest Price: ${x.cheapest}</span><br/>

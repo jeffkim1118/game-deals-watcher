@@ -4,6 +4,7 @@ import { Routes,  Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Login from './components/Login'
 import Register from './components/Register'
+import Profile from './components/Profile';
 import Home from './components/Home';
 import Browse from './components/Browse';
 import SearchResult from './components/SearchResult';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>
+        <Route path="/profile" element={<Profile currentUser={currentUser} />}/>
         <Route path="/searchresult" element={<SearchResult searchResult={searchResult} currentUser={currentUser} />}/>
       </Routes>
 

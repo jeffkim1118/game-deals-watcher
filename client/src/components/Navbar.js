@@ -25,7 +25,7 @@ export default function Navbar({currentUser, setCurrentUser, searchResult}){
                             <Link className="link" to="/" >Home</Link>           
                             <Link className="link" to="/browse">Browse</Link>
                             <Link className="link" to="/whishlist">Wishlist</Link>
-                            <Link className="link" to="/profile">Profile</Link>                      
+                            <Link className="link" to="/profile">Profile</Link>                 
                             <p className='profile-username'>{currentUser.username}</p>
                             <button className='log_out_btn' onClick={handleLogoutClick}>Logout</button>
                         </div>
