@@ -19,6 +19,7 @@ export default function Navbar({currentUser, setCurrentUser, searchResult}){
         <div>
             <header className="navigationHeader">
                 <div className="nav">
+                    <Link className='link' to="/"><strong><span>GDWatcher</span></strong></Link>
                     {currentUser ? (
                         <div className='nav-links'>
                             <Link className="link" to="/" >Home</Link>           

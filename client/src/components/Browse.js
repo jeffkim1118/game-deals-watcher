@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { debounce } from './utils';
+import StoreFinder from './StoreFinder';
 
 function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
@@ -18,6 +19,7 @@ function Browse({currentUser}) {
         .then((gameList)=> setGameDealsList(gameList));
     }, []);
 
+    
 
     const fetchDealsDebounced = useMemo(() => {
         // So API call will not be triggered until 400ms passed since last
@@ -42,6 +44,7 @@ function Browse({currentUser}) {
 
     return(
         <div className="container-fluid">
+            
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>
@@ -65,6 +68,7 @@ function Browse({currentUser}) {
                         <span>{Math.round(game.savings)}% Off</span>
                     </div>
                     <div className="col">
+                        <StoreFinder storeID={game.storeID}/>
                         <button onClick={(e)=>handleRedirect(e, game.dealID)}>Visit Store</button>
                     </div>
                     <div className="col">

@@ -15,8 +15,9 @@ function SearchResult({searchResult, currentUser}){
 
     return(
         <div >
-            {searchResult ? 
-            <div>
+            <h1>Your Search Result</h1>
+            {searchResult ?            
+            <div className='search-result'>           
                 {searchResult.map((x) => <div className="result-container" key={x}><div>
                     <img className='thumbnail_pic' src={x.thumb} alt='game-img'/>
                     <p>{x.external}</p>
