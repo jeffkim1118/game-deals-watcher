@@ -1,18 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { debounce } from './utils';
 
 function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
     const [gameTitle, setTitle] = useState('')
-    const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('')
 
-    const defaultURL = `https://www.cheapshark.com/api/1.0/deals?`
+    const fetchDeals = useCallback((queryObject) => {
+        const url = new URL(`https://www.cheapshark.com/api/1.0/deals?`);
+
+        for(const [key, value] of Object.entries(queryObject)){
+            if(value) url.searchParams.append(key, value);
+        }
+        console.log(url);
+        return fetch(url)
+        .then((r)=>r.json())
+        .then((gameList)=> setGameDealsList(gameList));
+    }, []);
+
+
+    const fetchDealsDebounced = useMemo(() => {
+        // So API call will not be triggered until 400ms passed since last
+    // action that may trigger api call
+        return debounce(fetchDeals, 400);
+    }, [fetchDeals])
 
     useEffect(()=>{
-        fetch(defaultURL)
-        .then((r)=>r.json())
-        .then((gameList)=> setGameDealsList(gameList))
-    },[])
+        fetchDeals({ title: gameTitle, upperPrice: maxPrice})
+        // fetch(defaultURL)
+        // .then((r)=>r.json())
+        // .then((gameList)=> setGameDealsList(gameList))
+    },[fetchDealsDebounced, gameTitle, maxPrice]);
 
     console.log(gameDealsList)
 
@@ -27,12 +45,12 @@ function Browse({currentUser}) {
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>
-            <span>Price Range $:</span>
-            <input placeholder='Min' value={minPrice} onChange={(e)=>setMinPrice(e.target.value)}></input>
-            <input placeholder='Max' value={maxPrice} onChange={(e)=>setMaxPrice(e.target.value)}></input>
+            <span>Max Price $:</span>
+            <input type="range" className="price-filter" min="0" max="70" value={maxPrice} onChange={(e)=>setMaxPrice(e.target.value)}/>
+            <span>${maxPrice}</span>
             <br/><br/>
 
-            {gameDealsList.map((game) => 
+            {gameDealsList ? gameDealsList.map((game) => 
             <div className="container" key={game.dealID}>
                 <div className="row">
                     <div className="col">
@@ -54,7 +72,7 @@ function Browse({currentUser}) {
                     </div>
                 </div><br/>
             </div>
-            )}
+            ) : <h1>No Result Found</h1>}
             
         </div>
     )

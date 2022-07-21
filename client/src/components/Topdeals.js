@@ -7,7 +7,7 @@ export default function Topdeal({currentUser}){
     const[topDealsList, setTopDeals] = useState([])
 
     useEffect(() => {
-        fetch(`https://www.cheapshark.com/api/1.0/deals?storeID=1&storeID=7&upperPrice=60&AAA=1`)
+        fetch(`https://www.cheapshark.com/api/1.0/deals?storeID=1&storeID=7&upperPrice=60`)
         .then((r) => r.json())
         .then(topDealsGames => setTopDeals(topDealsGames))
     }, [])
