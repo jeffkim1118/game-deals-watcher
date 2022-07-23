@@ -13,7 +13,7 @@ import Wishlist from './components/WishList'
 function App() {
   const [currentUser, setCurrentUser] = useState();  
   const [searchResult, setResult] = useState();
-  const [wishListItem, setListItem] = useState();
+  
 
   useEffect(()=>{
     fetch("/me").then((r)=>{

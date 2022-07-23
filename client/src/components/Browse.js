@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { debounce } from './utils';
 import StoreFinder from './StoreFinder';
 
-function Browse({currentUser, setListItem}) {
+function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
@@ -29,9 +29,6 @@ function Browse({currentUser, setListItem}) {
 
     useEffect(()=>{
         fetchDeals({ title: gameTitle, upperPrice: maxPrice})
-        // fetch(defaultURL)
-        // .then((r)=>r.json())
-        // .then((gameList)=> setGameDealsList(gameList))
     },[fetchDealsDebounced, gameTitle, maxPrice]);
 
 
