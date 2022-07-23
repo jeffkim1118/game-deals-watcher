@@ -13,11 +13,14 @@ function SearchResult({searchResult, currentUser}){
         .then(x => setDeals(x.deals))
     }
 
+    
+
     return(
-        <div >
+        <div>
             <h1>Your Search Result</h1>
             {searchResult ?            
-            <div className='search-result'>           
+            <div className='search-result'>
+                {console.log(searchResult)}           
                 {searchResult.map((x) => <div className="result-container" key={x.gameID}><div>
                     <img className='thumbnail_pic' src={x.thumb} alt='game-img'/>
                     <p>{x.external}</p>

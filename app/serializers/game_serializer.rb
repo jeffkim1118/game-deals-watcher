@@ -1,3 +1,3 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :title, :retailPrice, :cheapestPrice, :deal_id, :wishlist_id
+  attributes :id, :title, :gameID, :retailPrice, :cheapestPrice, :thumb
 end

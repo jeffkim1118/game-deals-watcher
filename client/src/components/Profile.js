@@ -1,13 +1,11 @@
 import React, {useState} from "react"
-import { useForm } from "react-hook-form";
-
 
 export default function Profile({loggedInUser}) {
     const[first_name, setFirstName] = useState('')
     const[last_name, setLastName] = useState('')
     const[email, setEmail] = useState('')
     const[password, setPassword] = useState('')
-    const[updatedStatus, setUpdatedStatus] = useState()
+    
     
     console.log(loggedInUser)
 
@@ -44,6 +42,7 @@ export default function Profile({loggedInUser}) {
    
 
     return(
+        
         <div className="profile-container">
             <div className="update" >
                 <form className="profile-update-form"  >

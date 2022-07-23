@@ -39,8 +39,7 @@ class GamesController < ApplicationController
     end
 
     def post_params
-        params.permit(:title)
+        params.permit(:title, :gameID, :retailPrice, :cheapestPrice, :thumb)
     end 
-
 
 end

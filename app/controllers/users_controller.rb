@@ -26,7 +26,7 @@ class UsersController < ApplicationController
         end
     end
 
-    def update_user_profile
+    def update
         currentUser = User.find_by(id: session[:id])
         if currentUser
             currentUser.update(user_update_params)
@@ -45,10 +45,10 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:first_name, :last_name, :email, :phone, :username, :password)
+        params.permit(:first_name, :last_name, :email, :username, :password)
     end
 
     def user_update_params
-        params.permit(:first_name, :last_name, :phone, :password)
+        params.permit(:first_name, :last_name, :email, :password)
     end
 end

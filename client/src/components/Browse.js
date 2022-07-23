@@ -2,10 +2,11 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { debounce } from './utils';
 import StoreFinder from './StoreFinder';
 
-function Browse({currentUser}) {
+function Browse({currentUser, setListItem}) {
     const [gameDealsList, setGameDealsList] = useState([]);
-    const [gameTitle, setTitle] = useState('')
-    const [maxPrice, setMaxPrice] = useState('')
+    const [gameTitle, setTitle] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+    const [saved, setSaved] = useState();
 
     const fetchDeals = useCallback((queryObject) => {
         const url = new URL(`https://www.cheapshark.com/api/1.0/deals?`);
@@ -20,7 +21,6 @@ function Browse({currentUser}) {
     }, []);
 
     
-
     const fetchDealsDebounced = useMemo(() => {
         // So API call will not be triggered until 400ms passed since last
     // action that may trigger api call
@@ -34,7 +34,6 @@ function Browse({currentUser}) {
         // .then((gameList)=> setGameDealsList(gameList))
     },[fetchDealsDebounced, gameTitle, maxPrice]);
 
-    console.log(gameDealsList)
 
     function handleRedirect(e, dealID){
         e.preventDefault();
@@ -42,12 +41,23 @@ function Browse({currentUser}) {
         return null;
     }
 
+
+    useEffect(()=>{
+        handleClick(e, game)
+    },[])
+
+    function handleClick(e, game){
+        e.preventDefault();
+        setSaved(game);
+    }
+    
+
     return(
         <div className="container-fluid">
             
             <h1>Browse</h1>
             <h4>Filter:</h4>
-            <input placeholder='Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>
+            <input placeholder='Enter a Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>
             <span>Max Price $:</span>
             <input type="range" className="price-filter" min="0" max="70" value={maxPrice} onChange={(e)=>setMaxPrice(e.target.value)}/>
             <span>${maxPrice}</span>
@@ -72,7 +82,7 @@ function Browse({currentUser}) {
                         <button onClick={(e)=>handleRedirect(e, game.dealID)}>Visit Store</button>
                     </div>
                     <div className="col">
-                        {currentUser ? <button>Add to wishlist</button> : null}                   
+                        {currentUser ? <button onClick={(e)=>handleClick(e, game)}>Add to wishlist</button> : null}                   
                     </div>
                 </div><br/>
             </div>
