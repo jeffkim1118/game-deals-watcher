@@ -6,7 +6,7 @@ function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [saved, setSaved] = useState();
+    // const [saved, setSaved] = useState();
 
     const fetchDeals = useCallback((queryObject) => {
         const url = new URL(`https://www.cheapshark.com/api/1.0/deals?`);
@@ -39,14 +39,14 @@ function Browse({currentUser}) {
     }
 
 
-    useEffect(()=>{
-        handleClick(e, game)
-    },[])
+    // useEffect(()=>{
+    //     handleClick(e, game)
+    // },[])
 
-    function handleClick(e, game){
-        e.preventDefault();
-        setSaved(game);
-    }
+    // function handleClick(e, game){
+    //     e.preventDefault();
+    //     setSaved(game);
+    // }
     
 
     return(
@@ -79,7 +79,7 @@ function Browse({currentUser}) {
                         <button onClick={(e)=>handleRedirect(e, game.dealID)}>Visit Store</button>
                     </div>
                     <div className="col">
-                        {currentUser ? <button onClick={(e)=>handleClick(e, game)}>Add to wishlist</button> : null}                   
+                        {currentUser ? <button>Add to wishlist</button> : null}                   
                     </div>
                 </div><br/>
             </div>

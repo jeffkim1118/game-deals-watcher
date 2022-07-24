@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   resources :games
-  resources :users
+  # resources :users
   resources :wishlists
   resources :sessions
   
   get '/login', to: "sessions#create"
-
+  get '/users', to: "users#index"
   # Register new user
   post '/users', to: "users#create"
   # Login User
@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   patch '/users/:id', to: "users#update"
   # Keep user logged in
   get '/me', to: "users#show"
-
+  # Get request for find user based on User id
+  get '/users/:id', to: "users#find_user"
 
   # -------------GAMES Routes----------------------
 

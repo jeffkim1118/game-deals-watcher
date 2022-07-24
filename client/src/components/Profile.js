@@ -1,77 +1,54 @@
 import React, {useState} from "react"
 
-export default function Profile({loggedInUser}) {
-    const[first_name, setFirstName] = useState('')
-    const[last_name, setLastName] = useState('')
-    const[email, setEmail] = useState('')
-    const[password, setPassword] = useState('')
+export default function Profile({currentUser, setCurrentUser}) {
+    const[first_name, setFirstName] = useState("")
+    const[last_name, setLastName] = useState("")
+    const[email, setEmail] = useState("")
+    const[password, setPassword] = useState("")
     const[isShown, setIsShown] = useState(false)
-    
-    console.log(loggedInUser)
-
-    // const prefill = {
-    //     first_name: loggedInUser.first_name,
-    //     last_name: loggedInUser.last_name,
-    //     email: loggedInUser.email,
-    //     password: loggedInUser.password
-    // }
-
-    // const { update, updateProfile } = useForm({
-    //     defaultValues: prefill
-    // });
-
-    // const onSubmit = (data) => {
-    //     fetch(`/user`, {
-    //         method: "PATCH",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(data)
-    //     })
-    //     .then((r)=>r.json())
-    //     .then((x) => console.log(x))
-    //     .catch(err => alert(err.message))
-    // }
-
-
-    // function updateProfile(e){
-    //     e.preventDefault();
-        
-    // }
+    const username = currentUser.username;
 
     function handleUpdate(e){
-        e.preventDefault();
+        e.preventDefault();       
         const userData = {
             first_name,
             last_name,
             email,
+            username,
             password
         }
-        fetch(`/user/${loggedInUser.id}`, {
+        fetch(`/users/${currentUser.id}`, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json"
+                "Content-type": "application/json"
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(userData),
         })
         .then((r)=>r.json())
-        .then((x) => console.log(x))
-        .catch(err => alert(err.message))
+        .then((x) => setCurrentUser(x))
+        .catch(err => console.log(err))
+        setIsShown(false)
     }
 
     const handleUpdateProfile = (e) => {
         e.preventDefault();
         setIsShown(current => !current)
-        setFirstName(loggedInUser.first_name)
-        setLastName(loggedInUser.last_name)
-        setEmail(loggedInUser.email)
-        setPassword(loggedInUser.password)
+        setFirstName(currentUser.first_name)
+        setLastName(currentUser.last_name)
+        setEmail(currentUser.email)
+        setPassword(currentUser.password_digest)
     }
-   
 
     return(
-        
         <div className="profile-container">
+            <div>
+                <p>Username: {currentUser.username}</p>
+                <p>Last Name: {currentUser.last_name}</p>
+                <p>First Name: {currentUser.first_name}</p>
+                <p>Email: {currentUser.email}</p>
+                <p>Password: ************</p>
+                <button onClick={(e)=>handleUpdateProfile(e)}>Change profile info</button>
+            </div>
             {isShown && (
             <div className="update" >
                 <form className="profile-update-form" onSubmit={handleUpdate} >
@@ -107,15 +84,6 @@ export default function Profile({loggedInUser}) {
                 </form>
             </div>
             )}
-            <div>
-                <h1>{loggedInUser.username}</h1>
-                <p>First Name: {loggedInUser.first_name}</p>
-                <p>Last Name: {loggedInUser.last_name}</p>
-                <p>Email: {loggedInUser.email}</p>
-                <p>password: {loggedInUser.password}</p>
-                <button onClick={(e)=>handleUpdateProfile(e)}>Change profile info</button>
-            </div>
-            
         </div>
     )
 }

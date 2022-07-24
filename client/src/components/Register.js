@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register({setCurrentUser}){
-    const[first_name, setFirstName] = useState('')
-    const[last_name, setLastName] = useState('')
-    const[email, setEmail] = useState('')
-    const[username, setUsername] = useState('')
-    const[password, setPassword] = useState('')
+    const[first_name, setFirstName] = useState("")
+    const[last_name, setLastName] = useState("")
+    const[email, setEmail] = useState("")
+    const[username, setUsername] = useState("")
+    const[password, setPassword] = useState("")
     const[registeredStatus, setRegisteredStatus] = useState()
 
     let navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Register({setCurrentUser}){
             password
         }
 
-        if(newUser.first_name === '' || newUser.last_name==='' || newUser.email==='' || username==='' || password===''){
+        if(newUser.first_name === "" || newUser.last_name==="" || newUser.email==="" || username==="" || password===""){
             setRegisteredStatus(false)
         }else{
             fetch(`/users`, {

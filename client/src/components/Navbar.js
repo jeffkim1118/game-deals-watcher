@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar({currentUser, setCurrentUser, searchResult}){
 
+    let navigate = useNavigate();
 
     function handleLogoutClick(){
         fetch('/logout', {
@@ -11,6 +12,7 @@ export default function Navbar({currentUser, setCurrentUser, searchResult}){
         .then((r)=>{
             if(r.ok){
                 setCurrentUser(null);
+                navigate('/')
             }
         })
     }

@@ -7,6 +7,15 @@ class UsersController < ApplicationController
         render json: users
     end
 
+    def find_user
+        user = User.find_by(id: params[:id])
+        if user
+            render json: user, status: :not_found
+        else
+            render json: { error: "Not found" }, status: :not_found
+        end
+    end
+
     def show
         user = User.find_by(id: session[:user_id])
         if user
@@ -27,9 +36,12 @@ class UsersController < ApplicationController
     end
 
     def update
-        currentUser = User.find_by(id: session[:id])
+        currentUser = User.find_by(id: params[:id])
         if currentUser
             currentUser.update(user_update_params)
+            render json: currentUser, status: :accepted
+        else
+            render json: {error: currentUser.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
@@ -49,6 +61,6 @@ class UsersController < ApplicationController
     end
 
     def user_update_params
-        params.permit(:first_name, :last_name, :email, :password)
+        params.permit(:first_name, :last_name, :email, :username, :password)
     end
 end
