@@ -1,11 +1,12 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 export default function Profile({currentUser, setCurrentUser}) {
-    const[first_name, setFirstName] = useState("")
-    const[last_name, setLastName] = useState("")
-    const[email, setEmail] = useState("")
-    const[password, setPassword] = useState("")
-    const[isShown, setIsShown] = useState(false)
+    const[first_name, setFirstName] = useState("");
+    const[last_name, setLastName] = useState("");
+    const[email, setEmail] = useState("");
+    const[password, setPassword] = useState("");
+    const[isShown, setIsShown] = useState(false);
+    
     const username = currentUser.username;
 
     function handleUpdate(e){
@@ -36,12 +37,12 @@ export default function Profile({currentUser, setCurrentUser}) {
         setFirstName(currentUser.first_name)
         setLastName(currentUser.last_name)
         setEmail(currentUser.email)
-        setPassword(currentUser.password_digest)
+        setPassword(currentUser.password)
     }
 
     return(
         <div className="profile-container">
-            <div>
+            <div className="profile-info">
                 <p>Username: {currentUser.username}</p>
                 <p>Last Name: {currentUser.last_name}</p>
                 <p>First Name: {currentUser.first_name}</p>

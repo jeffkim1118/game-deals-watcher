@@ -6,7 +6,14 @@ function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    // const [saved, setSaved] = useState();
+    
+    const [savedtitle, setSaveTitle] = useState('');
+    const [savedGameID, setSaveGameID] = useState('');
+    const [savedRetailed, setSaveRetailed] = useState('');
+    const [savedCheapest, setSaveCheapest] = useState('');
+    const [savedThumb, setSaveThumb] = useState('');
+    const [addedStatus, setStatus] = useState(false);
+
 
     const fetchDeals = useCallback((queryObject) => {
         const url = new URL(`https://www.cheapshark.com/api/1.0/deals?`);
@@ -21,6 +28,7 @@ function Browse({currentUser}) {
     }, []);
 
     
+    // It is to prevent API from crashing due to excessive amount of requests.
     const fetchDealsDebounced = useMemo(() => {
         // So API call will not be triggered until 400ms passed since last
     // action that may trigger api call
@@ -38,20 +46,67 @@ function Browse({currentUser}) {
         return null;
     }
 
-
     // useEffect(()=>{
-    //     handleClick(e, game)
+    //     updateData()
     // },[])
 
-    // function handleClick(e, game){
+    // function updateData(e, game){
     //     e.preventDefault();
-    //     setSaved(game);
+    //     setSaveTitle(game.title);
+    //     setSaveGameID(game.gameID);
+    //     setSaveRetailed(game.normalPrice);
+    //     setSaveCheapest(game.salePrice);
+    //     setSaveThumb(game.thumb);
     // }
-    
 
+
+
+    function saveData(game){
+        
+        console.log(game)
+        setSaveTitle(game.title);
+        setSaveGameID(game.gameID);
+        setSaveRetailed(game.normalPrice);
+        setSaveCheapest(game.salePrice);
+        setSaveThumb(game.thumb);
+        const user_id = currentUser.id;
+        const dataForWishlist = {
+        savedtitle: game.title,
+        savedGameID: game.gameID,
+        savedRetailed: game.normalPrice,
+        savedCheapest: game.salePrice,
+        savedThumb: game.thumb,
+        user_id
+    }
+    
+        
+        console.log(dataForWishlist)
+        
+        // // e.preventDefault();
+       
+        // // console.log(user_id)
+        
+        
+        
+        // console.log(dataForWishlist)
+        // console.log(dataForWishlist)
+        // fetch(`/games`, {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json'},
+        //     body: JSON.stringify(dataForWishlist)
+        // })
+        // .then((r)=>{
+        //     if(r.ok){
+        //         r.json().then((x)=>console.log(x))
+        //         setStatus(true)
+        //     }
+        // })
+        // .catch((error)=>console.log(error))
+    }
+
+    
     return(
-        <div className="container-fluid">
-            
+        <div className="container-fluid">         
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Enter a Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>
@@ -79,12 +134,11 @@ function Browse({currentUser}) {
                         <button onClick={(e)=>handleRedirect(e, game.dealID)}>Visit Store</button>
                     </div>
                     <div className="col">
-                        {currentUser ? <button>Add to wishlist</button> : null}                   
+                        {currentUser ? <button onClick={()=>saveData(game)}>Add to wishlist</button> : null}                   
                     </div>
                 </div><br/>
             </div>
-            ) : <h1>No Result Found</h1>}
-            
+            ) : <h1>No Result Found</h1>}          
         </div>
     )
 }

@@ -38,7 +38,7 @@ class GamesController < ApplicationController
         return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 
-    def post_params
+    def games_params
         params.permit(:title, :gameID, :retailPrice, :cheapestPrice, :thumb)
     end 
 

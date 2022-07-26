@@ -18,7 +18,7 @@ function Searchbar({setSearchResult}){
     return(
         <div className='searchByTitle-container'>
             <div className='SearchByGameName'>
-                <form onSubmit={handleSearch}>
+                <form className="search-form" onSubmit={handleSearch}>
                     <input className="form-control" aria-describedby="inputGroup-sizing-lg" value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} placeholder="Search A Title"></input>
                     <button className='searchBtn' type="submit">Search</button>
                 </form>     

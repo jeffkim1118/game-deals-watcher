@@ -41,11 +41,11 @@ export default function Register({setCurrentUser}){
             <form className="mb-3" onSubmit={handleRegister}>
                 <h1>Register</h1>
                 {registeredStatus===false? <div className="alert alert-danger" role="alert">Sign up failed, Please enter necessary info!</div> : null}
-                <input className="form-control" id="floatingInputValue" placeholder='First name' value={first_name} onChange={(e)=>setFirstName(e.target.value)}></input>
-                <input className="form-control" id="floatingInputValue" placeholder='Last name' value={last_name} onChange={(e)=>setLastName(e.target.value)}></input>
-                <input className="form-control" id="floatingInputValue" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
-                <input className="form-control" id="floatingInputValue" placeholder='username' value={username} onChange={(e)=>setUsername(e.target.value)}></input>
-                <input className="form-control" id="floatingInputValue" placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+                <input className="form-control" placeholder='First name' value={first_name} onChange={(e)=>setFirstName(e.target.value)}></input><br/>
+                <input className="form-control"  placeholder='Last name' value={last_name} onChange={(e)=>setLastName(e.target.value)}></input><br/>
+                <input className="form-control" type="email" placeholder='Email (Please enter a valid email)' value={email} onChange={(e)=>setEmail(e.target.value)}></input><br/>
+                <input className="form-control"  placeholder='username' value={username} onChange={(e)=>setUsername(e.target.value)}></input><br/>
+                <input className="form-control" type="password" placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input><br/>
                 <button type='submit'>Submit</button>
             </form>
         </div>

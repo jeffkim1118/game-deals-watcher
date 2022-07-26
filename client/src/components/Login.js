@@ -38,8 +38,8 @@ export default function Login({setCurrentUser}){
             <form className="mb-3" onSubmit={handleSubmit}>
                 <h1>Login</h1>
                 {loggedin===false ? <div className="alert alert-danger" role="alert">Login Failed! Please check your credential again.</div> : null}           
-                <input type="username" className='form-control' id="floatingInputValue" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username' ></input>           
-                <input type="password" className='form-control' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password' ></input>
+                <input type="username" className='form-control' id="floatingInputValue" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username' ></input><br/>         
+                <input type="password" className='form-control' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password' ></input><br/>
                 <button type='submit'>Login</button>
             </form>
         </div>
