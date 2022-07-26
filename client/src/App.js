@@ -27,7 +27,7 @@ function App() {
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/> } exact/>
+        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/>}/>
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>

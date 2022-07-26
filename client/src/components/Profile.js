@@ -7,10 +7,10 @@ export default function Profile({currentUser, setCurrentUser}) {
     const[password, setPassword] = useState("");
     const[isShown, setIsShown] = useState(false);
     
-    const username = currentUser.username;
-
+    
     function handleUpdate(e){
-        e.preventDefault();       
+        e.preventDefault();  
+        const username = currentUser.username;
         const userData = {
             first_name,
             last_name,
@@ -42,14 +42,15 @@ export default function Profile({currentUser, setCurrentUser}) {
 
     return(
         <div className="profile-container">
-            <div className="profile-info">
+            {currentUser ? <div className="profile-info">
                 <p>Username: {currentUser.username}</p>
                 <p>Last Name: {currentUser.last_name}</p>
                 <p>First Name: {currentUser.first_name}</p>
                 <p>Email: {currentUser.email}</p>
                 <p>Password: ************</p>
                 <button onClick={(e)=>handleUpdateProfile(e)}>Change profile info</button>
-            </div>
+            </div>: null }
+            
             {isShown && (
             <div className="update" >
                 <form className="profile-update-form" onSubmit={handleUpdate} >

@@ -15,7 +15,7 @@ export default function StoreFinder({storeID}){
         <div>
             {stores.map((st) => {
         if(st.storeID === storeID){
-            return <div>
+            return <div key={storeID}>
                 <img className="storeLogo" src={defaultImgAddress+st.images.logo} alt="store-logo"/>
                 <p>{st.storeName}</p>
                 </div>

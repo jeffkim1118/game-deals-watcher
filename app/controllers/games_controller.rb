@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     skip_before_action :authorized, only: [:index, :show, :create]
 
     def show
-        games = User.find(params[:id]).games
+        games = User.find_by(id: params[:id]).games
         render json: games, include: :user
     end
 

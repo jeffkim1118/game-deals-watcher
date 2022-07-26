@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :wishlists
   resources :sessions
   
+  #--------------USER------------------------------
+  # Create Session
   get '/login', to: "sessions#create"
   get '/users', to: "users#index"
   # Register new user
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   # -------------GAMES Routes----------------------
 
   # Show all the games that belongs to logged in user
-  get '/games/:id', to: "games#show"
+  get '/games', to: "games#show"
   # Create a new wishlist
   post '/games', to: "games#create"
   # Delete a game from wishlist
