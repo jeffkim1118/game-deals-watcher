@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import ProfilePicture from "./ProfilePicture";
 
 export default function Profile({currentUser, setCurrentUser}) {
     const[first_name, setFirstName] = useState("");
@@ -6,11 +7,11 @@ export default function Profile({currentUser, setCurrentUser}) {
     const[email, setEmail] = useState("");
     const[password, setPassword] = useState("");
     const[isShown, setIsShown] = useState(false);
+    const[updatedStat, setStatus] = useState(false);
     
-    const username = currentUser.username;
-
     function handleUpdate(e){
-        e.preventDefault();       
+        e.preventDefault();
+        const username = currentUser.username;
         const userData = {
             first_name,
             last_name,
@@ -18,6 +19,7 @@ export default function Profile({currentUser, setCurrentUser}) {
             username,
             password
         }
+       
         fetch(`/users/${currentUser.id}`, {
             method: "PATCH",
             headers: {
@@ -29,8 +31,9 @@ export default function Profile({currentUser, setCurrentUser}) {
         .then((x) => setCurrentUser(x))
         .catch(err => console.log(err))
         setIsShown(false)
-    }
-
+        setStatus(true)
+        }
+    
     const handleUpdateProfile = (e) => {
         e.preventDefault();
         setIsShown(current => !current)
@@ -39,17 +42,20 @@ export default function Profile({currentUser, setCurrentUser}) {
         setEmail(currentUser.email)
         setPassword(currentUser.password)
     }
-
+    
     return(
         <div className="profile-container">
-            <div className="profile-info">
+            {updatedStat === true ? <div class="alert alert-success" role="alert">Profile updated!</div> : null}
+            {currentUser ? <div className="profile-info">
+                <ProfilePicture /> 
                 <p>Username: {currentUser.username}</p>
                 <p>Last Name: {currentUser.last_name}</p>
                 <p>First Name: {currentUser.first_name}</p>
                 <p>Email: {currentUser.email}</p>
                 <p>Password: ************</p>
                 <button onClick={(e)=>handleUpdateProfile(e)}>Change profile info</button>
-            </div>
+            </div>: null }
+            
             {isShown && (
             <div className="update" >
                 <form className="profile-update-form" onSubmit={handleUpdate} >
@@ -74,7 +80,7 @@ export default function Profile({currentUser, setCurrentUser}) {
                         value={email} 
                         onChange={(e)=>setEmail(e.target.value)}
                     /><br/>
-                    <label>Password:</label>
+                    <label>Password Confirmation:</label>
                     <input 
                         type='input' 
                         className="password" 

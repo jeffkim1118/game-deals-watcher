@@ -1,0 +1,2 @@
+class GameMemosController < ApplicationController
+end

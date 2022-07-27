@@ -169,3 +169,12 @@ body{
     font-size: 20px;
     color: aliceblue;
 }
+
+.wishlist_container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile_avatar{
+    width: 250px;
+}

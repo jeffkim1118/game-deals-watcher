@@ -6,12 +6,6 @@ function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    
-    const [savedtitle, setSaveTitle] = useState('');
-    const [savedGameID, setSaveGameID] = useState('');
-    const [savedRetailed, setSaveRetailed] = useState('');
-    const [savedCheapest, setSaveCheapest] = useState('');
-    const [savedThumb, setSaveThumb] = useState('');
     const [addedStatus, setStatus] = useState(false);
 
 
@@ -21,7 +15,6 @@ function Browse({currentUser}) {
         for(const [key, value] of Object.entries(queryObject)){
             if(value) url.searchParams.append(key, value);
         }
-        console.log(url);
         return fetch(url)
         .then((r)=>r.json())
         .then((gameList)=> setGameDealsList(gameList));
@@ -30,7 +23,7 @@ function Browse({currentUser}) {
     
     // It is to prevent API from crashing due to excessive amount of requests.
     const fetchDealsDebounced = useMemo(() => {
-        // So API call will not be triggered until 400ms passed since last
+    // So API call will not be triggered until 400ms passed since last
     // action that may trigger api call
         return debounce(fetchDeals, 400);
     }, [fetchDeals])
@@ -46,67 +39,35 @@ function Browse({currentUser}) {
         return null;
     }
 
-    // useEffect(()=>{
-    //     updateData()
-    // },[])
-
-    // function updateData(e, game){
-    //     e.preventDefault();
-    //     setSaveTitle(game.title);
-    //     setSaveGameID(game.gameID);
-    //     setSaveRetailed(game.normalPrice);
-    //     setSaveCheapest(game.salePrice);
-    //     setSaveThumb(game.thumb);
-    // }
-
-
-
-    function saveData(game){
-        
+    function saveData(game){ 
         console.log(game)
-        setSaveTitle(game.title);
-        setSaveGameID(game.gameID);
-        setSaveRetailed(game.normalPrice);
-        setSaveCheapest(game.salePrice);
-        setSaveThumb(game.thumb);
-        const user_id = currentUser.id;
+       
         const dataForWishlist = {
-        savedtitle: game.title,
-        savedGameID: game.gameID,
-        savedRetailed: game.normalPrice,
-        savedCheapest: game.salePrice,
-        savedThumb: game.thumb,
-        user_id
-    }
-    
-        
+        title:game.title,
+        gameID:game.gameID,
+        retailPrice:game.normalPrice,
+        cheapestPrice:game.salePrice,
+        thumb:game.thumb,
+        }
         console.log(dataForWishlist)
         
-        // // e.preventDefault();
-       
-        // // console.log(user_id)
-        
-        
-        
-        // console.log(dataForWishlist)
-        // console.log(dataForWishlist)
-        // fetch(`/games`, {
-        //     method: "POST",
-        //     headers: { 'Content-Type': 'application/json'},
-        //     body: JSON.stringify(dataForWishlist)
-        // })
-        // .then((r)=>{
-        //     if(r.ok){
-        //         r.json().then((x)=>console.log(x))
-        //         setStatus(true)
-        //     }
-        // })
-        // .catch((error)=>console.log(error))
+        fetch(`/games`, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(dataForWishlist)
+        })
+        .then((r)=>{
+            if(r.ok){
+                r.json().then((x)=>console.log(x))
+                setStatus(true)
+            }
+        })
+        .catch((error)=>console.log(error))
     }
 
-    
     return(
-        <div className="container-fluid">         
+        <div className="container-fluid">
+            {addedStatus === true ? <div class="alert alert-success" role="alert">Added to wishlist</div> : null}         
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Enter a Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>

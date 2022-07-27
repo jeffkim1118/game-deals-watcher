@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function SearchResult({searchResult, currentUser}){
-    const[deals, setDeals] = useState();
-    const[isShown, setShown] = useState(false);
+    // const[deals, setDeals] = useState();
+    // const[isShown, setShown] = useState(false);
 
-    console.log(deals)
-
-    function viewDeals(e, gameID){
-        e.preventDefault();
-        fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameID}`)
-        .then((r)=>r.json())
-        .then(x => setDeals(x.deals))
-        setShown(current => !current)
-    }
+    // function viewDeals(e, gameID){
+    //     e.preventDefault();
+    //     fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameID}`)
+    //     .then((r)=>r.json())
+    //     .then(x => setDeals(x.deals))
+    //     setShown(current => !current)
+    // }
     console.log(searchResult)
+
+    function saveData(game){ 
+        const dataForWishlist = {
+        title:game.external,
+        gameID:game.gameID,
+        retailPrice:game.normalPrice,
+        cheapestPrice:game.cheapest,
+        thumb:game.thumb,
+        }
+        console.log(dataForWishlist)  
+        fetch(`/games`, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(dataForWishlist)
+        })
+        .then((r)=>{
+            if(r.ok){
+                r.json().then((x)=>console.log(x))
+            }
+        })
+        .catch((error)=>console.log(error))
+    }
 
     return(
         <div>
@@ -25,15 +45,15 @@ function SearchResult({searchResult, currentUser}){
                     <img className='thumbnail_pic' src={game.thumb} alt='game-img'/>
                     <p>{game.external}</p>
                     <span>Cheapest Price: ${game.cheapest}</span><br/>
-                    <button className='btn btn-primary' onClick={(e)=>{viewDeals(e, game.gameID)}}>View Deals</button>
-                    {isShown && (
+                    {/* <button className='btn btn-primary' onClick={(e)=>{viewDeals(e, game.gameID)}}>View Deals</button> */}
+                    {/* {isShown && (
                         // (deals.map((deal)=>{return <div>
                         //     <p>{deal.price}</p>
                         // </div>
                         // }))
                         <div>Hello</div>
-                    )}
-                    {currentUser ? <button>Add to wishlist</button>:null}
+                    )} */}
+                    {currentUser ? <button onClick={()=>saveData(game)}>Add to wishlist</button>:null}
                     </div>
                 </div>)}           
             </div> 

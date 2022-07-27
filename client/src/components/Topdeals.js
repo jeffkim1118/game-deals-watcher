@@ -50,7 +50,7 @@ export default function Topdeal({currentUser}){
                             <strong><span className='game-info'>{Math.round(singleDeal.savings)}% Off</span></strong><br/>
                             <span className='game-info'>Price: <s>${singleDeal.normalPrice}</s> <strong>${singleDeal.salePrice}</strong></span><br/>
                             <span className='game-info'>Meta Critics Score: {singleDeal.metacriticScore}</span><br/>
-                            {currentUser ? <button>Add to my wishlist</button> : null}
+                            {/* {currentUser ? <button>Add to my wishlist</button> : null} */}
                         </div>                  
                     </div>
                 ))}               

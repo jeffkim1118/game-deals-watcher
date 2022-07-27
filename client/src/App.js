@@ -27,11 +27,11 @@ function App() {
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/> } exact/>
+        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult}/>}/>
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>
-        <Route path='/wishlist' element={<Wishlist currentUser={currentUser}/>}/>
+        <Route path='/wishlist' element={<Wishlist currentUser={currentUser} setCurrentUser={setCurrentUser}/>}/>
         <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>}/>
         <Route path="/searchresult" element={<SearchResult searchResult={searchResult} currentUser={currentUser} />}/>
       </Routes>

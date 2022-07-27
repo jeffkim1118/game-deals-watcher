@@ -2,20 +2,21 @@ class GamesController < ApplicationController
     before_action :authorized
     skip_before_action :authorized, only: [:index, :show, :create]
 
-    def show
-        games = User.find(params[:id]).games
-        render json: games, include: :user
-    end
-
     def index
         games = Game.all
         render json: games, include: :user
+    end
+
+    def show
+        games = User.find_by(id: params[:id]).games
+        render json: games, include: :user_id
     end
 
     def create
         user = User.find_by(id: session[:user_id])
         game = user.games.create(games_params)
         if game.valid?
+            # byebug
             render json: game, status: :created
         else
             render jsons: {error: game.errors.full_messages }, status: :unprocessable_entity
@@ -23,7 +24,8 @@ class GamesController < ApplicationController
     end
 
     def destroy
-        game = Game.find_by(id: params[:id])
+        user = User.find_by(id: session[:user_id])
+        game = user.games.find_by(id: params[:id])
         if game
             game.destroy
             render json: {}
