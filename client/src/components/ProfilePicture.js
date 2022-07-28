@@ -1,7 +1,7 @@
 import React from "react";
 import IMAGES from '../images/Image';
 
-export default function ProfilePicture(){
+export default function ProfilePicture({currentUser}){
     const fileTypes = [
         "image/apng",
         "image/bmp",
@@ -15,15 +15,35 @@ export default function ProfilePicture(){
         "image/x-icon"
       ];
    
-      function handleChange(){
+      function handleSubmit(e){
+        e.preventDefault();
+        let file = e.target.uploadFile.files[0]
 
+        let formData = new FormData()
+        formData.append('file', file)
+
+        fetch(`/users/${currentUser.id}` ,{
+            method: "POST",
+            body: formData
+        })
+        .then((r) => r.json())
+        .then(data => {
+            if (data.errors) {
+                alert(data.errors)
+             }
+             else {
+                console.log(data)
+             }
+        })
       }
 
     return(
-        <div>
+        <div> 
             <img src={IMAGES.defaultProfile} alt="default_profile_image" className="profile_avatar"/>       
-            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={handleChange}/>
-            <button>Upload</button>    
+            <form onSubmit={handleSubmit}>
+                <input type="file" id="avatar" name="avatar" accept={fileTypes}/>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     )
 }

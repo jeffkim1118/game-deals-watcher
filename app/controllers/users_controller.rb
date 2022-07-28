@@ -55,6 +55,19 @@ class UsersController < ApplicationController
         end
     end
 
+    def set_avatar
+        currentUser = User.find_by(id: params[:id])
+        if currentUser
+            begin
+                file = params[:file].tempfile.read
+                data = JSON.parse(file)
+                render json: data
+            rescue
+                render json: { errors: "Upload Failed" }
+            end
+        end
+    end
+
     private
     def user_params
         params.permit(:first_name, :last_name, :email, :username, :password)

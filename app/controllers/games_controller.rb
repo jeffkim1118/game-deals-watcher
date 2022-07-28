@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
     before_action :authorized
-    skip_before_action :authorized, only: [:index, :show, :create]
+    skip_before_action :authorized, only: [:index, :show, :create, :show_game]
 
     def index
         games = Game.all
@@ -29,6 +29,16 @@ class GamesController < ApplicationController
         if game
             game.destroy
             render json: {}
+        else
+            render json: { error: "Game not found" }, status: :not_found
+        end
+    end
+
+    def show_game
+        user = User.find_by(id: session[:user_id])
+        if user
+            game = user.games.find_by(id: params[:game_id])
+            render json: game
         else
             render json: { error: "Game not found" }, status: :not_found
         end

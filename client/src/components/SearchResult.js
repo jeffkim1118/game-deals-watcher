@@ -11,7 +11,6 @@ function SearchResult({searchResult, currentUser}){
     //     .then(x => setDeals(x.deals))
     //     setShown(current => !current)
     // }
-    console.log(searchResult)
 
     function saveData(game){ 
         const dataForWishlist = {

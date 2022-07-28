@@ -14,7 +14,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState();  
   const [searchResult, setResult] = useState();
   
-
+  
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if(r.ok){

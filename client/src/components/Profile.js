@@ -45,15 +45,17 @@ export default function Profile({currentUser, setCurrentUser}) {
     
     return(
         <div className="profile-container">
-            {updatedStat === true ? <div class="alert alert-success" role="alert">Profile updated!</div> : null}
+            {updatedStat === true ? <div className="alert alert-success" role="alert">Profile updated!</div> : null}
             {currentUser ? <div className="profile-info">
-                <ProfilePicture /> 
-                <p>Username: {currentUser.username}</p>
-                <p>Last Name: {currentUser.last_name}</p>
-                <p>First Name: {currentUser.first_name}</p>
-                <p>Email: {currentUser.email}</p>
-                <p>Password: ************</p>
-                <button onClick={(e)=>handleUpdateProfile(e)}>Change profile info</button>
+                <div><ProfilePicture currentUser={currentUser} /></div>
+                <div>
+                    <p>Username: {currentUser.username}</p>
+                    <p>Last Name: {currentUser.last_name}</p>
+                    <p>First Name: {currentUser.first_name}</p>
+                    <p>Email: {currentUser.email}</p>
+                    <p>Password: ************</p>
+                    <button onClick={(e)=>handleUpdateProfile(e)}>Change profile info</button>
+                </div>
             </div>: null }
             
             {isShown && (

@@ -178,3 +178,24 @@ body{
 .profile_avatar{
     width: 250px;
 }
+
+.profile-container{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.profile-info{
+    width: fit-content;
+    margin: auto;
+    display: flex;
+}
+
+.img-thumbnail{
+    width: 200px;
+    height: 250px;
+}
+.gameCard{
+    margin: 10px;
+}

@@ -67,7 +67,7 @@ function Browse({currentUser}) {
 
     return(
         <div className="container-fluid">
-            {addedStatus === true ? <div class="alert alert-success" role="alert">Added to wishlist</div> : null}         
+            {addedStatus === true ? <div className="alert alert-success" role="alert">Added to wishlist</div> : null}         
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Enter a Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>

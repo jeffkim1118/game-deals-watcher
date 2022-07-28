@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # resources :memos
   # resources :games
   # resources :users
-  resources :wishlists
   resources :sessions
   
   #--------------USER------------------------------
@@ -23,8 +22,10 @@ Rails.application.routes.draw do
   get '/me', to: "users#show"
   # Get request for find user based on User id
   get '/users/:id', to: "users#find_user"
+  
 
   # -------------GAMES Routes----------------------
+
   get '/games', to: 'games#index'
   # Show all the games that belongs to logged in user
   get '/users/:id/games', to: "games#show"
@@ -33,9 +34,11 @@ Rails.application.routes.draw do
   # Delete a game from wishlist
   delete '/users/:id/games/:id', to: "games#destroy"
 
-  #-------------Memo Routes------------------------
-  get '/games/:id/memos', to: "memos#show"
 
+  #-------------Memo Routes------------------------
+  # Show memos that belongs to a game
+  get '/games/:id/memos', to: "memos#show"
+  # Post memos to a game
   post '/games/:id/memos', to: "memos#create"
 
 end
