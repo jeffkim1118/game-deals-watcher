@@ -1,5 +1,6 @@
 # GD Watcher (Game Deals Watcher)
-![image](https://user-images.githubusercontent.com/64029918/181631744-a5aca872-256c-46cb-bad2-d418e4d2b04d.png)
+![image](https://user-images.githubusercontent.com/64029918/181631894-2d493c4b-1319-4532-b885-f1d435af3240.png)
+
 ##Summary
 It is a web application that help users to look up video games deals from various online stores such as Steam, GOG, and more. Users can also visit stores that provides the deals. It also provides wishlist for each users to track certains video games's best deals. The wishlist feature can only be used after creating an account. The account profile can also be updated through profile page after logging in. 
 
