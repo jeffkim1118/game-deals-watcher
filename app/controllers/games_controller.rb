@@ -16,7 +16,6 @@ class GamesController < ApplicationController
         user = User.find_by(id: session[:user_id])
         game = user.games.create(games_params)
         if game.valid?
-            # byebug
             render json: game, status: :created
         else
             render jsons: {error: game.errors.full_messages }, status: :unprocessable_entity

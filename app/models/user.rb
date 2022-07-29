@@ -8,4 +8,5 @@ class User < ApplicationRecord
     validates :password, presence: true
 
     has_one_attached :avatar
+
 end

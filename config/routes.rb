@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   # Get request for find user based on User id
   get '/users/:id', to: "users#find_user"
   
-
   # -------------GAMES Routes----------------------
 
   get '/games', to: 'games#index'

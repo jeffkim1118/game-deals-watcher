@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import ProfilePicture from "./ProfilePicture";
 
-export default function Profile({currentUser, setCurrentUser}) {
+
+function Profile({currentUser, setCurrentUser}) {
     const[first_name, setFirstName] = useState("");
     const[last_name, setLastName] = useState("");
     const[email, setEmail] = useState("");
@@ -46,8 +47,11 @@ export default function Profile({currentUser, setCurrentUser}) {
     return(
         <div className="profile-container">
             {updatedStat === true ? <div className="alert alert-success" role="alert">Profile updated!</div> : null}
-            {currentUser ? <div className="profile-info">
-                <div><ProfilePicture currentUser={currentUser} /></div>
+            {currentUser ? <div className="profile-info">          
+                <div>
+                <ProfilePicture currentUser={currentUser} />
+                </div>
+                
                 <div>
                     <p>Username: {currentUser.username}</p>
                     <p>Last Name: {currentUser.last_name}</p>
@@ -96,3 +100,4 @@ export default function Profile({currentUser, setCurrentUser}) {
         </div>
     )
 }
+export default Profile;

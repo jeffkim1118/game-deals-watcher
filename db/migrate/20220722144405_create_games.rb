@@ -6,7 +6,7 @@ class CreateGames < ActiveRecord::Migration[7.0]
       t.string :retailPrice
       t.string :cheapestPrice
       t.string :thumb
-
+      t.integer :user_id
       t.timestamps
     end
   end

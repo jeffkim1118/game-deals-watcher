@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     def find_user
         user = User.find_by(id: params[:id])
         if user
-            render json: user, status: :not_found
+            render json: user
         else
             render json: { error: "Not found" }, status: :not_found
         end
@@ -52,19 +52,6 @@ class UsersController < ApplicationController
             head :no_content
         else
             render json: {error: "user not found"}, status: :not_found
-        end
-    end
-
-    def set_avatar
-        currentUser = User.find_by(id: params[:id])
-        if currentUser
-            begin
-                file = params[:file].tempfile.read
-                data = JSON.parse(file)
-                render json: data
-            rescue
-                render json: { errors: "Upload Failed" }
-            end
         end
     end
 

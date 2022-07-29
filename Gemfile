@@ -54,3 +54,4 @@ gem "image_processing", ">= 1.2"
 
   # Enables backend API calling
 gem 'rest-client', '~> 2.1'
+gem "jsonapi-serializer", "~> 2.2"
