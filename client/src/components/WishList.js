@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import Memo from './Memo';
 
-export default function WishList({currentUser, setCurrentUser, setPriceLimitStatus}){
+export default function WishList({currentUser, setCurrentUser, setPriceLimitStatus, setPriceLimitStatus}){
     const [games, setGames] = useState([]);
     const [memo, setSavedMemo] = useState();
     const [status, setStatus] = useState();
@@ -37,6 +37,8 @@ export default function WishList({currentUser, setCurrentUser, setPriceLimitStat
         fetch(`https://www.cheapshark.com/api/1.0/alerts?action=delete&email=${currentUser.email}&gameID=${game.gameID}`)
         .then((r)=>r.json())
         .then((x) => console.log(x))
+        setPriceLimitStatus(true)
+        navigate('/')
     }
 
     function setLimit(game){
