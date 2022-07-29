@@ -45,6 +45,22 @@ Back-end (Ruby On Rails)
 ```bash
 rails s
 ```
+## Interface
+Register Page
+![image](https://user-images.githubusercontent.com/64029918/181807997-c9c49da6-4b6b-4b72-858d-cbd846a29e68.png)
+
+Login Page
+![image](https://user-images.githubusercontent.com/64029918/181808052-bb82b570-ee6e-488c-8bbc-bfcc95b8c29d.png)
+
+Browse Page
+![image](https://user-images.githubusercontent.com/64029918/181808127-5cb3a83a-cedf-48a2-89a6-8aa5b43a6873.png)
+
+Wishlist Page(after logging in)
+![image](https://user-images.githubusercontent.com/64029918/181808255-7f1c58a0-a8fb-4638-b262-838f5cae82dc.png)
+
+Profile Page(after register and logging in)
+![image](https://user-images.githubusercontent.com/64029918/181808337-54c0cb3a-24b4-481d-a670-00e43c453e8b.png)
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
