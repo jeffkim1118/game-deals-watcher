@@ -12,9 +12,8 @@ import Wishlist from './components/WishList'
 
 function App() {
   const [currentUser, setCurrentUser] = useState();  
-  const [searchResult, setResult] = useState();
-  
-  
+  const [searchResult, setResult] = useState(); 
+
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if(r.ok){
@@ -34,9 +33,9 @@ function App() {
         <Route path='/wishlist' element={<Wishlist currentUser={currentUser} setCurrentUser={setCurrentUser}/>}/>
         <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>}/>
         <Route path="/searchresult" element={<SearchResult searchResult={searchResult} currentUser={currentUser} />}/>
-      </Routes>
-
+      </Routes>   
     </div>
+  
   );
 }
 
