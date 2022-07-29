@@ -47,7 +47,7 @@ export default function WishList({currentUser, setCurrentUser}){
         .then((r)=>r.json())
         .then((x) => console.log(x))
         // setPriceLimitStatus(true);
-        // alert(`Price alert has been set to`+ priceLimit + '!')
+        alert(`Price alert has been set to`+ priceLimit + '!')
         navigate('/')
     }
 
