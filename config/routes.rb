@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # resources :games
   # resources :users
   resources :sessions
-  
+
   #--------------USER------------------------------
   # Create Session
   get '/login', to: "sessions#create"
@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get '/me', to: "users#show"
   # Get request for find user based on User id
   get '/users/:id', to: "users#find_user"
+
+  patch '/users/:id/avatar', to: "users#upload_avatar"
   
   # -------------GAMES Routes----------------------
 
@@ -39,5 +41,8 @@ Rails.application.routes.draw do
   get '/games/:id/memos', to: "memos#show"
   # Post memos to a game
   post '/games/:id/memos', to: "memos#create"
+
+
+  root to: "main#index"
 
 end

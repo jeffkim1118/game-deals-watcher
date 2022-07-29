@@ -1,6 +1,9 @@
-import React, { useState } from "react"
-import ProfilePicture from "./ProfilePicture";
+import React, { createContext, useState } from "react"
+import AvatarForm from "./AvatarForm";
+import LatestA from "./LatestA";
+// import ProfilePicture from "./ProfilePicture";
 
+export const ProfileContext = createContext(null)
 
 function Profile({currentUser, setCurrentUser}) {
     const[first_name, setFirstName] = useState("");
@@ -43,15 +46,20 @@ function Profile({currentUser, setCurrentUser}) {
         setEmail(currentUser.email)
         setPassword(currentUser.password)
     }
-    
+
+    const [latestAvatar, setLatestAvatar] = useState(ProfileContext);
     return(
         <div className="profile-container">
             {updatedStat === true ? <div className="alert alert-success" role="alert">Profile updated!</div> : null}
-            {currentUser ? <div className="profile-info">          
+            {currentUser ? <div className="profile-info"> 
+                <ProfileContext.Provider value={{latestAvatar, setLatestAvatar}}>          
                 <div>
-                <ProfilePicture currentUser={currentUser} />
+                {/* <ProfilePicture currentUser={currentUser} /> */}
+                <LatestA currentUser={currentUser}/>
+                <AvatarForm currentUser={currentUser}/>
                 </div>
-                
+                </ProfileContext.Provider> 
+
                 <div>
                     <p>Username: {currentUser.username}</p>
                     <p>Last Name: {currentUser.last_name}</p>

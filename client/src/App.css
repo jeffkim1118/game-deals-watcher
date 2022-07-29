@@ -199,3 +199,10 @@ body{
 .gameCard{
     margin: 10px;
 }
+
+.latest-avatar{
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}

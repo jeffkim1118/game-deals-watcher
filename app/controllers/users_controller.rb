@@ -45,6 +45,17 @@ class UsersController < ApplicationController
         end
     end
 
+    def upload_avatar
+        user = User.find_by(id: params[:id])
+        if user
+            user.update(avatar: params[:avatar])
+            avatar_url = rails_blob_path(user.avatar)
+            render json: user
+        else
+            render json: {error: avatar.errors.full_messages }
+        end
+    end
+
     def destroy
         user = User.find_by(id: params[:id])
         if user
@@ -57,7 +68,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:first_name, :last_name, :email, :username, :password)
+        params.permit(:first_name, :last_name, :email, :username, :password, :avatar)
     end
 
     def user_update_params
