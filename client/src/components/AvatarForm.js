@@ -6,19 +6,15 @@ function AvatarForm({currentUser}) {
 
     function handleSubmit(event){
         event.preventDefault();
-        const data = new FormData();
-
-        data.append("user[avatar]", event.target.avatar.files[0]);
+        // const data = new FormData();
+        let data = event.target.avatar.files[0]
+        // data.append("user[avatar]", event.target.avatar.files[0]);
         submitToAPI(data)
     }
 
     function submitToAPI(data){
         fetch(`/users/${currentUser.id}/avatar`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            method: "POST",
             body: data,
         })
         .then((response) => response.json())

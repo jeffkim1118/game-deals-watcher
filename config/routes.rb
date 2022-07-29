@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # Get request for find user based on User id
   get '/users/:id', to: "users#find_user"
 
-  patch '/users/:id/avatar', to: "users#upload_avatar"
+  post '/users/:id/avatar', to: "users#upload_avatar"
   
   # -------------GAMES Routes----------------------
 

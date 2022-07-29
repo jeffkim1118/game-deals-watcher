@@ -6,7 +6,7 @@ import IMAGES from '../images/Image';
 import { useNavigate } from 'react-router-dom';
 
 
-function Home({currentUser, setResult}){
+function Home({currentUser, setResult, priceLimitStatus}){
     const [searchResult, setSearchResult] = useState();
     setResult(searchResult)
 
@@ -25,6 +25,7 @@ function Home({currentUser, setResult}){
 
     return(
         <div className='header'>
+            {priceLimitStatus===true ? <div className="alert alert-success" role="alert">Price alert email created!</div> : null}
             <div className='home-search'>
                 <div className='search-container'>
                     <h1>Save More On Games</h1>

@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react"
 import AvatarForm from "./AvatarForm";
 import LatestA from "./LatestA";
-// import ProfilePicture from "./ProfilePicture";
+import ProfilePicture from "./ProfilePicture";
 
 export const ProfileContext = createContext(null)
 
@@ -54,9 +54,9 @@ function Profile({currentUser, setCurrentUser}) {
             {currentUser ? <div className="profile-info"> 
                 <ProfileContext.Provider value={{latestAvatar, setLatestAvatar}}>          
                 <div>
-                {/* <ProfilePicture currentUser={currentUser} /> */}
-                <LatestA currentUser={currentUser}/>
-                <AvatarForm currentUser={currentUser}/>
+                <ProfilePicture currentUser={currentUser} />
+                {/* <LatestA currentUser={currentUser}/> */}
+                {/* <AvatarForm currentUser={currentUser}/> */}
                 </div>
                 </ProfileContext.Provider> 
 

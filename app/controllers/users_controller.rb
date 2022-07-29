@@ -48,9 +48,12 @@ class UsersController < ApplicationController
     def upload_avatar
         user = User.find_by(id: params[:id])
         if user
-            user.update(avatar: params[:avatar])
-            avatar_url = rails_blob_path(user.avatar)
-            render json: user
+            avatar = user[:avatar].tempfile.read
+            data = JSON.parse(avatar)
+            render json: data
+            # user.update(avatar: params[:avatar])
+            # avatar_url = rails_blob_path(user.avatar)
+            # render json: user
         else
             render json: {error: avatar.errors.full_messages }
         end
