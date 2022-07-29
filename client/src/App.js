@@ -13,8 +13,7 @@ import Wishlist from './components/WishList'
 function App() {
   const [currentUser, setCurrentUser] = useState();  
   const [searchResult, setResult] = useState();
-  const [priceLimitStatus, setPriceLimitStatus] = useState();
-  const [deleteStatus, setDeleteStatus] = useState();
+  
 
   useEffect(()=>{
     fetch("/me").then((r)=>{
@@ -28,11 +27,11 @@ function App() {
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult} priceLimitStatus={priceLimitStatus} deleteStatus={deleteStatus}/>}/>
+        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult} />}/>
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>
-        <Route path='/wishlist' element={<Wishlist currentUser={currentUser} setCurrentUser={setCurrentUser} setPriceLimitStatus={setPriceLimitStatus} setDeleteStatus={setDeleteStatus}/>}/>
+        <Route path='/wishlist' element={<Wishlist currentUser={currentUser} setCurrentUser={setCurrentUser} />}/>
         <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>}/>
         <Route path="/searchresult" element={<SearchResult searchResult={searchResult} currentUser={currentUser} />}/>
       </Routes>   
