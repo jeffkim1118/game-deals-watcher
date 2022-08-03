@@ -1,12 +1,14 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import Memo from './Memo';
+import PriceLimit from './PriceLimit';
+import GameDeals from './GameDeals';
 
 export default function WishList({currentUser, setCurrentUser}){
     const [games, setGames] = useState([]);
     const [memo, setSavedMemo] = useState();
     const [status, setStatus] = useState();
-    const [priceLimit, setPriceLimit] = useState('');
+    const [priceLimit, setPriceLimit] = useState();
     let navigate = useNavigate();
 
     useEffect(()=>{ 
@@ -61,12 +63,9 @@ export default function WishList({currentUser, setCurrentUser}){
                 <br/><img src={game.thumb} className="img-thumbnail" alt='thumbnail'/>
                 <p>{game.title}</p>
                 <p>Retail: $<s>{game.retailPrice}</s><br/>Cheapest: <strong>${game.cheapestPrice}</strong></p>
-                <form onSubmit={(e)=>setLimit(e, game)}>
-                    <label>Price Limit: </label>
-                    $ <input className='alert-price' value={priceLimit} onChange={(e) => setPriceLimit(e.target.value)} placeholder='Set Price'/>
-                    <button type="submit">Create Alert</button>
-                </form>   
+                <PriceLimit game={game} setPriceLimit={setPriceLimit} setLimit={setLimit} priceLimit={priceLimit}/>
                 <Memo game={game} setSavedMemo={setSavedMemo} memo={memo}/>
+                <GameDeals gameID={game.gameID}/>
                 <button onClick={()=>deleteGame(game)}>Remove game</button>
                 </div>)
             }) : null}

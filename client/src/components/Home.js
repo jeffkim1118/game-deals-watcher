@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import Searchbar from './Searchbar';
 import Topdeals from './Topdeals';
 import IMAGES from '../images/Image';
 import { useNavigate } from 'react-router-dom';
+import PriceAlert from './PriceAlert';
 
 
-function Home({currentUser, setResult}){
+function Home({currentUser, setResult, setGames, games}){
     const [searchResult, setSearchResult] = useState();
+    // const [deals, setDeals] = useState();
+
     setResult(searchResult)
 
     let navigate = useNavigate();
@@ -23,8 +26,19 @@ function Home({currentUser, setResult}){
         pauseOnFocus: false
     };
 
+    useEffect(()=>{
+        if(currentUser){
+            fetch(`/users/${currentUser.id}/games`)
+            .then((r) => r.json())
+            .then((x) => setGames(x))
+        }
+    },[])
+    
     return(
         <div className='header'>
+            {currentUser ? games.map((wishListGame) => { 
+                return <div key={wishListGame.id}><PriceAlert wishListGameID={wishListGame.gameID}/></div>
+                }) : null}
             {/* {priceLimitStatus===true ? <div className="alert alert-success" role="alert">Price alert email created!</div> : null} */}
             {/* {deleteStatus===true ? <div className="alert alert-success" role="alert">Game removed from your wishlist!</div> : null} */}
             <div className='home-search'>

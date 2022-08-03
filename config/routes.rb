@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   # Post memos to a game
   post '/games/:id/memos', to: "memos#create"
 
+  delete '/games/:id/memos/:id', to: "memos#delete"
 
   root to: "main#index"
 

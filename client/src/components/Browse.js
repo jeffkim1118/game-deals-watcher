@@ -7,11 +7,11 @@ function Browse({currentUser}) {
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [addedStatus, setStatus] = useState(false);
-
+    const [errorStatus, setErrorStatus] = useState(false);
 
     const fetchDeals = useCallback((queryObject) => {
-        const url = new URL(`https://www.cheapshark.com/api/1.0/deals?`);
-
+        const url = new URL(`https://www.cheapshark.com/api/1.0/deals?sortBy=Price`);
+        // Changes query request based on which filter does user uses. (Either max price or title of game)
         for(const [key, value] of Object.entries(queryObject)){
             if(value) url.searchParams.append(key, value);
         }
@@ -39,9 +39,7 @@ function Browse({currentUser}) {
         return null;
     }
 
-    function saveData(game){ 
-        console.log(game)
-       
+    function saveData(game){     
         const dataForWishlist = {
         title:game.title,
         gameID:game.gameID,
@@ -62,12 +60,13 @@ function Browse({currentUser}) {
                 setStatus(true)
             }
         })
-        .catch((error)=>console.log(error))
+        .catch(setErrorStatus(true))
+        
     }
-
     return(
         <div className="container-fluid">
-            {addedStatus === true ? <div className="alert alert-success" role="alert">Added to wishlist</div> : null}         
+            {addedStatus === true ? <div className="alert alert-success" role="alert">Added to wishlist</div> : null}
+            {errorStatus === true ? <div className="alert alert-danger" role="alert">Same game already exist in your wishlist!</div> : null}
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Enter a Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>
@@ -75,7 +74,7 @@ function Browse({currentUser}) {
             <input type="range" className="price-filter" min="0" max="70" value={maxPrice} onChange={(e)=>setMaxPrice(e.target.value)}/>
             <span>${maxPrice}</span>
             <br/><br/>
-
+            {/* {console.log(gameDealsList)} */}
             {gameDealsList ? gameDealsList.map((game) => 
             <div className="container" key={game.dealID}>
                 <div className="row">

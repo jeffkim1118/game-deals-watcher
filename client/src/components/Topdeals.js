@@ -10,6 +10,7 @@ export default function Topdeal({currentUser}){
         fetch(`https://www.cheapshark.com/api/1.0/deals?storeID=1&storeID=7&upperPrice=20`)
         .then((r) => r.json())
         .then(topDealsGames => setTopDeals(topDealsGames))
+        .catch((error)=>console.log(error))
     }, [])
    
     const result = topDealsList.filter(checkTopDeals);

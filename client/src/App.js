@@ -13,21 +13,22 @@ import Wishlist from './components/WishList'
 function App() {
   const [currentUser, setCurrentUser] = useState();  
   const [searchResult, setResult] = useState();
-  
+  const [games, setGames] = useState([])
+ 
 
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if(r.ok){
         r.json().then((user)=>setCurrentUser(user))
       }
-    })
+    }) 
   },[])
 
   return (
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult} />}/>
+        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult} setGames={setGames} games={games}/>}/>
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>

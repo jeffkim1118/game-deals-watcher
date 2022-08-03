@@ -20,6 +20,18 @@ class MemosController < ApplicationController
         end
     end
 
+    def delete
+        user = User.find_by(id: session[:user_id])
+        game = user.games.find_by(id: params[:id])
+        memo = game.memos.find_by(id: params[:id])
+        if memo
+            memo.delete
+            render json: {}
+        else
+            render json: {error: "The memo doesn't exist"}
+        end
+    end
+
     private
     def memos_params
         params.permit(:content)

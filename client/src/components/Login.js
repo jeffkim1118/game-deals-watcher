@@ -34,8 +34,7 @@ export default function Login({setCurrentUser}){
     }
 
     return(
-        <div>
-            
+        <div>    
             <form className="mb-3" onSubmit={handleSubmit}>
                 <h1>Login</h1>
                 {loggedin===false ? <div className="alert alert-danger" role="alert">Login Failed! Please check your credential again.</div> : null}           
