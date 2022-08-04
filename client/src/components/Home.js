@@ -10,6 +10,7 @@ import PriceAlert from './PriceAlert';
 function Home({currentUser, setResult, setGames, games}){
     const [searchResult, setSearchResult] = useState();
     // const [deals, setDeals] = useState();
+    // const [wishListDeal, setDeals] = useState();
 
     setResult(searchResult)
 
@@ -33,7 +34,7 @@ function Home({currentUser, setResult, setGames, games}){
             .then((x) => setGames(x))
         }
     },[])
-    
+
     return(
         <div className='header'>
             {currentUser ? games.map((wishListGame) => { 
