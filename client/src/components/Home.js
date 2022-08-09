@@ -9,8 +9,6 @@ import PriceAlert from './PriceAlert';
 
 function Home({currentUser, setResult, setGames, games}){
     const [searchResult, setSearchResult] = useState();
-    // const [deals, setDeals] = useState();
-    // const [wishListDeal, setDeals] = useState();
 
     setResult(searchResult)
 
@@ -38,7 +36,7 @@ function Home({currentUser, setResult, setGames, games}){
     return(
         <div className='header'>
             {currentUser ? games.map((wishListGame) => { 
-                return <div key={wishListGame.id}><PriceAlert wishListGameID={wishListGame.gameID}/></div>
+                return <div key={wishListGame.id}><PriceAlert wishListGameID={wishListGame.gameID} /></div>
                 }) : null}
             {/* {priceLimitStatus===true ? <div className="alert alert-success" role="alert">Price alert email created!</div> : null} */}
             {/* {deleteStatus===true ? <div className="alert alert-success" role="alert">Game removed from your wishlist!</div> : null} */}

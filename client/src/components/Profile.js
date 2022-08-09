@@ -15,36 +15,39 @@ function Profile({currentUser, setCurrentUser}) {
     
     function handleUpdate(e){
         e.preventDefault();
-        const username = currentUser.username;
-        const userData = {
-            first_name,
-            last_name,
-            email,
-            username,
-            password
+        if (password === ''){
+            alert("Please enter a new password!")
+        }else{
+            const username = currentUser.username;
+            const userData = {
+                first_name,
+                last_name,
+                email,
+                username,
+                password
+            }
+           
+            fetch(`/users/${currentUser.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(userData),
+            })
+            .then((r)=>r.json())
+            .then((x) => setCurrentUser(x))
+            .catch(err => console.log(err))
+            setIsShown(false)
+            setStatus(true)
+            }
         }
        
-        fetch(`/users/${currentUser.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(userData),
-        })
-        .then((r)=>r.json())
-        .then((x) => setCurrentUser(x))
-        .catch(err => console.log(err))
-        setIsShown(false)
-        setStatus(true)
-        }
-    
     const handleUpdateProfile = (e) => {
         e.preventDefault();
         setIsShown(current => !current)
         setFirstName(currentUser.first_name)
         setLastName(currentUser.last_name)
         setEmail(currentUser.email)
-        setPassword(currentUser.password)
     }
 
     // const [latestAvatar, setLatestAvatar] = useState(ProfileContext);
@@ -94,7 +97,7 @@ function Profile({currentUser, setCurrentUser}) {
                         value={email} 
                         onChange={(e)=>setEmail(e.target.value)}
                     /><br/>
-                    <label>Password Confirmation:</label>
+                    <label>New Password Required:</label>
                     <input 
                         type='input' 
                         className="password" 

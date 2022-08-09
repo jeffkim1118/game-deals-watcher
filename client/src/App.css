@@ -198,7 +198,11 @@ body{
     height: 250px;
 }
 .gameCard{
+    width: 300px;
+    text-align: center;
     margin: 10px;
+    background-color: rgba(173, 173, 173, 0.473);
+    border-radius: 30px;
 }
 
 .latest-avatar{
@@ -225,4 +229,14 @@ body{
     margin: none;
     border: 1px solid rgb(64, 126, 126);
     text-align: center;
+}
+
+#wishListBtn{
+    width: 200px;
+}
+
+.mb-3{
+    width: 300px;
+    background-color: rgba(85, 85, 85, 0.171);
+    border-radius: 10px;
 }

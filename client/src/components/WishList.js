@@ -1,14 +1,14 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import Memo from './Memo';
-import PriceLimit from './PriceLimit';
+// import PriceLimit from './PriceLimit';
 import GameDeals from './GameDeals';
 
 export default function WishList({currentUser, setCurrentUser}){
-    const [games, setGames] = useState([]);
+    const [games, setGames] = useState();
     const [memo, setSavedMemo] = useState();
     const [status, setStatus] = useState();
-    const [priceLimit, setPriceLimit] = useState();
+    // const [priceLimit, setPriceLimit] = useState();
     let navigate = useNavigate();
 
     useEffect(()=>{ 
@@ -18,6 +18,7 @@ export default function WishList({currentUser, setCurrentUser}){
             .then((x) => setGames(x)) 
         }else{
             setCurrentUser(currentUser)
+            navigate('/')
         }
     },[])
 
@@ -35,23 +36,23 @@ export default function WishList({currentUser, setCurrentUser}){
             .then((r) => r.json())
             .then((x) => setGames(x)) 
         }
-        fetch(`https://www.cheapshark.com/api/1.0/alerts?action=delete&email=${currentUser.email}&gameID=${game.gameID}`)
-        .then((r)=>r.json())
-        .then((x) => console.log(x))
+        // fetch(`https://www.cheapshark.com/api/1.0/alerts?action=delete&email=${currentUser.email}&gameID=${game.gameID}`)
+        // .then((r)=>r.json())
+        // .then((x) => console.log(x))
         alert("Wishlist item removed!")
         // setDeleteStatus(true)
         navigate('/')
     }
 
-    function setLimit(e, game){
-        e.preventDefault();
-        fetch(`https://www.cheapshark.com/api/1.0/alerts?action=set&email=${currentUser.email}&gameID=${game.gameID}&price=${priceLimit}`)
-        .then((r)=>r.json())
-        .then((x) => console.log(x))
-        // setPriceLimitStatus(true);
-        alert(`Price alert has been set to`+ priceLimit + '!')
-        navigate('/')
-    }
+    // function setLimit(e, game){
+    //     e.preventDefault();
+    //     fetch(`https://www.cheapshark.com/api/1.0/alerts?action=set&email=${currentUser.email}&gameID=${game.gameID}&price=${priceLimit}`)
+    //     .then((r)=>r.json())
+    //     .then((x) => console.log(x))
+    //     // setPriceLimitStatus(true);
+    //     alert(`Price alert has been set to`+ priceLimit + '!')
+    //     navigate('/')
+    // }
 
     return (
         <div>
@@ -59,14 +60,15 @@ export default function WishList({currentUser, setCurrentUser}){
             {status === true ? <div className="alert alert-success" role="alert">Game Removed</div> : null}
         <div className='wishlist_container'> 
             {games ? games.map((game)=>{
+                console.log(game)
                 return (<div key={game.id} className="gameCard">
                 <br/><img src={game.thumb} className="img-thumbnail" alt='thumbnail'/>
                 <p>{game.title}</p>
-                <p>Retail: $<s>{game.retailPrice}</s><br/>Cheapest: <strong>${game.cheapestPrice}</strong></p>
-                <PriceLimit game={game} setPriceLimit={setPriceLimit} setLimit={setLimit} priceLimit={priceLimit}/>
-                <Memo game={game} setSavedMemo={setSavedMemo} memo={memo}/>
+                <p>Retail Price: ${game.retailPrice}<br/>Historically Cheapest Price: <strong>${game.cheapestPrice}</strong></p>
+                {/* <PriceLimit game={game} setPriceLimit={setPriceLimit} setLimit={setLimit} priceLimit={priceLimit}/> */}
+                <Memo currentUser={currentUser} game={game} setSavedMemo={setSavedMemo} memo={memo}/>
                 <GameDeals gameID={game.gameID}/>
-                <button onClick={()=>deleteGame(game)}>Remove game</button>
+                <button id="wishListBtn" onClick={()=>deleteGame(game)}>Remove game</button>
                 </div>)
             }) : null}
         </div>

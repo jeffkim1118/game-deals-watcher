@@ -58,9 +58,12 @@ function Browse({currentUser}) {
             if(r.ok){
                 r.json().then((x)=>console.log(x))
                 setStatus(true)
+            }else{
+                setStatus(false)
+                setErrorStatus(true)
             }
         })
-        .catch(setErrorStatus(true))
+        .catch((error)=>console.log(error))
         
     }
     return(

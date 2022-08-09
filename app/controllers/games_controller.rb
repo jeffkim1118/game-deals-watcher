@@ -12,7 +12,7 @@ class GamesController < ApplicationController
         render json: games, include: :user_id
     end
 
-    def create
+    def create  
         user = User.find_by(id: session[:user_id])
         game = user.games.create(games_params)
         if game.valid?

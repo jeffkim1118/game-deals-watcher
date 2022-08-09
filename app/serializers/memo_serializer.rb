@@ -1,3 +1,3 @@
 class MemoSerializer < ActiveModel::Serializer
-  attributes :id, :content
+  attributes :id, :content, :games
 end

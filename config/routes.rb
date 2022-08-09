@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   get '/games', to: 'games#index'
   # Show all the games that belongs to logged in user
   get '/users/:id/games', to: "games#show"
+
+  # Show individual games
+  get '/users/:id/games/:id', to: "games#show_game"
   # Create a new wishlist
   post '/games', to: "games#create"
   # Delete a game from wishlist
@@ -39,10 +42,14 @@ Rails.application.routes.draw do
   #-------------Memo Routes------------------------
   # Show memos that belongs to a game
   get '/games/:id/memos', to: "memos#show"
+
+  # Show memos based on ID
+  get '/users/:id/games/:id/memos/:id', to: "memos#show_memo"
+
   # Post memos to a game
   post '/games/:id/memos', to: "memos#create"
-
-  delete '/games/:id/memos/:id', to: "memos#delete"
+  # Delete memos 
+  # delete '/games/:id/memos/:id', to: "memos#delete"
 
   root to: "main#index"
 

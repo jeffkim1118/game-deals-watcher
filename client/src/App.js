@@ -15,7 +15,6 @@ function App() {
   const [searchResult, setResult] = useState();
   const [games, setGames] = useState([])
  
-
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if(r.ok){
@@ -24,13 +23,23 @@ function App() {
     }) 
   },[])
 
+  useEffect(()=>{ 
+    if(currentUser){
+        fetch(`/users/${currentUser.id}/games`)
+        .then((r) => r.json())
+        .then((x) => setGames(x)) 
+    }else{
+        setCurrentUser(currentUser)
+    }
+},[])
+
   return (
     <div>
-      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} setGames={setGames}/>
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} setResult={setResult} setGames={setGames} games={games}/>}/>
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
-        <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />}/>
+        <Route path="/login" element={<Login setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>
         <Route path='/wishlist' element={<Wishlist currentUser={currentUser} setCurrentUser={setCurrentUser} />}/>
         <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>}/>

@@ -24,7 +24,6 @@ export default function Register({setCurrentUser}){
 
         // submitToAPI(data);
 
-
         const newUser = {
             first_name,
             last_name,
@@ -47,10 +46,9 @@ export default function Register({setCurrentUser}){
             })
         }
     }
-
-
+    
     return(
-        <div>
+        <div className='register-form-container'>
             {/* <form className="mb-3" onSubmit={(e)=>handleRegister(e)}>
                 <h1>Register</h1>
                 {registeredStatus===false? <div className="alert alert-danger" role="alert">Sign up failed, Please enter necessary info!</div> : null}   

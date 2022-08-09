@@ -10,6 +10,18 @@ class MemosController < ApplicationController
         end
     end
 
+    def show_memo
+        user = User.find_by(id: session[:user_id])
+        games = user.games
+        game = games.find_by(id: params[:id])
+        memo = game.memos.find_by(id: params[:id])
+        if memo
+            render json: memo
+        else
+            render json: {error: "memo not found"}
+        end
+    end
+
     def create  
         game = Game.find_by(id: params[:id])
         memo = game.memos.create(memos_params)
@@ -20,17 +32,17 @@ class MemosController < ApplicationController
         end
     end
 
-    def delete
-        user = User.find_by(id: session[:user_id])
-        game = user.games.find_by(id: params[:id])
-        memo = game.memos.find_by(id: params[:id])
-        if memo
-            memo.delete
-            render json: {}
-        else
-            render json: {error: "The memo doesn't exist"}
-        end
-    end
+    # def delete
+    #     user = User.find_by(id: session[:user_id])
+    #     game = Game.find_by(id: params[:id])
+    #     memo = game.memos.find_by(id: params[:id])
+    #     if memo
+    #         memo.delete
+    #         render json: {}
+    #     else
+    #         render json: {error: "The memo doesn't exist"}
+    #     end
+    # end
 
     private
     def memos_params

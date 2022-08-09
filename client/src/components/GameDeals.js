@@ -16,7 +16,7 @@ function GameDeals({gameID}){
     }
     return(
         <div>
-           <button onClick={(e)=>redirectToDeal(e, gameDeals.deals[0].dealID)}>Go to the cheapest deal!</button>
+           <button  id="wishListBtn" onClick={(e)=>redirectToDeal(e, gameDeals.deals[0].dealID)}>Go to the cheapest deal!</button>
         </div>
     )
 }
