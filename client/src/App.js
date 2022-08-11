@@ -23,21 +23,22 @@ function App() {
     }) 
   },[])
 
-  useEffect(()=>{ 
-    if(currentUser){
-        fetch(`/users/${currentUser.id}/games`)
-        .then((r) => r.json())
-        .then((x) => setGames(x)) 
-    }else{
-        setCurrentUser(currentUser)
-    }
-},[])
+//   useEffect(()=>{ 
+//     if(currentUser){
+//         fetch(`/users/${currentUser.id}/games`)
+//         .then((r) => r.json())
+//         .then((x) => setGames(x)) 
+//     }else{
+//         setCurrentUser(currentUser)
+        
+//     }
+// },[])
 
   return (
     <div>
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} setGames={setGames}/>
       <Routes>
-        <Route path="/" element={<Home currentUser={currentUser} setResult={setResult} setGames={setGames} games={games}/>}/>
+        <Route exact path="/" element={<Home currentUser={currentUser} setResult={setResult} setGames={setGames} games={games}/>}/>
         <Route path="/browse" element={<Browse currentUser={currentUser} />}/>
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
         <Route path="/signup" element={<Register setCurrentUser={setCurrentUser} />}/>

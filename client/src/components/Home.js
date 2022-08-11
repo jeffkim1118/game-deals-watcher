@@ -31,7 +31,7 @@ function Home({currentUser, setResult, setGames, games}){
             .then((r) => r.json())
             .then((x) => setGames(x))
         }
-    },[])
+    },[currentUser])
 
     return(
         <div className='header'>

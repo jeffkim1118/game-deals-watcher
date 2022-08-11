@@ -25,7 +25,7 @@ export default function Login({setCurrentUser}){
         .then((r)=>{
             if(r.ok){
                 r.json().then((user)=>setCurrentUser(user))
-                navigate('/profile')
+                navigate('/')
             }else{
                 setLoggedinStatus(false)
             }

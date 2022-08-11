@@ -12,7 +12,6 @@ export default function Navbar({currentUser, setCurrentUser, setGames}){
         .then((r)=>{
             if(r.ok){
                 setCurrentUser(null);
-                setGames([])
                 navigate('/')
             }
         })

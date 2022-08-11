@@ -5,7 +5,7 @@ import Memo from './Memo';
 import GameDeals from './GameDeals';
 
 export default function WishList({currentUser, setCurrentUser}){
-    const [games, setGames] = useState();
+    const [games, setGames] = useState([]);
     const [memo, setSavedMemo] = useState();
     const [status, setStatus] = useState();
     // const [priceLimit, setPriceLimit] = useState();
