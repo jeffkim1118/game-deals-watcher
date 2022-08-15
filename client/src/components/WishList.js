@@ -66,7 +66,7 @@ export default function WishList({currentUser, setCurrentUser}){
                 <p>{game.title}</p>
                 <p>Retail Price: ${game.retailPrice}<br/>Historically Cheapest Price: <strong>${game.cheapestPrice}</strong></p>
                 {/* <PriceLimit game={game} setPriceLimit={setPriceLimit} setLimit={setLimit} priceLimit={priceLimit}/> */}
-                <Memo currentUser={currentUser} game={game} setSavedMemo={setSavedMemo} memo={memo}/>
+                <Memo currentUser={currentUser} game={game} setSavedMemo={setSavedMemo} memo={memo} />
                 <GameDeals gameID={game.gameID}/>
                 <button id="wishListBtn" onClick={()=>deleteGame(game)}>Remove game</button>
                 </div>)

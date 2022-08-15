@@ -36,7 +36,7 @@ class GamesController < ApplicationController
     def show_game
         user = User.find_by(id: session[:user_id])
         if user
-            game = user.games.find_by(id: params[:game_id])
+            game = user.games.find_by(id: params[:id])     
             render json: game
         else
             render json: { error: "Game not found" }, status: :not_found

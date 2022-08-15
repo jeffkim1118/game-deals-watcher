@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-export default function Memo({ game, setSavedMemo}) {
+export default function Memo({currentUser, game, setSavedMemo}) {
     const[init_memo, setMemo] = useState('')
     let navigate = useNavigate();
 
@@ -23,22 +23,23 @@ export default function Memo({ game, setSavedMemo}) {
        
     }
 
-    // function removeMemo(e, memo){
-    //     e.preventDefault();
-    //     if(currentUser){
-    //         fetch(`/games/${game.id}/memos/${memo.id}`, {
-    //             method: "DELETE",
-    //             headers: { 'Content-Type':'application/json'}
-    //            })
-    //             .then((r)=>r.json())
-    //             .then((x)=>console.log(x))
-    //     }
-    // }
+    function removeMemo(e, memo){
+        e.preventDefault();
+        console.log(memo)
+        if(currentUser){
+            fetch(`/games/${game.id}/memos/${memo.id}`, {
+                method: "DELETE",
+                headers: { 'Content-Type':'application/json'}
+            })
+            .then((r)=>r.json())
+            .then((x)=>console.log(x))
+        }
+    }
 
     return (
         <div>
             Memo: {game.memos ? game.memos.map((memo)=>{
-                    return <div key={memo.id}><span key={memo.id}>{memo.content}<br/></span>
+                    return <div key={memo.id}><span key={memo.id}>{memo.content}<br/><div><button onClick={(e)=>removeMemo(e,memo)}>X</button></div></span>
                    </div>
                 }):null}
             <form onSubmit={handleMemoSubmit}>
