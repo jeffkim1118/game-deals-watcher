@@ -1,10 +1,11 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-export default function Memo({currentUser, game, setSavedMemo}) {
+export default function Memo({currentUser, game, setSavedMemo, memo}) {
     const[init_memo, setMemo] = useState('')
     let navigate = useNavigate();
 
+    
     function handleMemoSubmit(e){
         e.preventDefault();
         if (init_memo === ''){
@@ -18,7 +19,7 @@ export default function Memo({currentUser, game, setSavedMemo}) {
                 if(r.ok){r.json().then((x)=>setSavedMemo(x))}  
             })
             alert("Memo has been saved");
-            navigate('/');
+            navigate('/')
         }
        
     }
@@ -27,13 +28,15 @@ export default function Memo({currentUser, game, setSavedMemo}) {
         e.preventDefault();
         console.log(memo)
         if(currentUser){
-            fetch(`/games/${game.id}/memos/${memo.id}`, {
+            fetch(`users/${currentUser.id}/games/${game.id}/memos/${memo.id}`, {
                 method: "DELETE",
                 headers: { 'Content-Type':'application/json'}
             })
             .then((r)=>r.json())
             .then((x)=>console.log(x))
         }
+        alert("Memo has been removed");
+        navigate('/')
     }
 
     return (

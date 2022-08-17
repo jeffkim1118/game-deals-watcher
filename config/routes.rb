@@ -41,6 +41,8 @@ Rails.application.routes.draw do
 
   #-------------Memo Routes------------------------
   # Show memos that belongs to a game
+  get '/memos', to: "memos#display_all_memos"
+
   get '/games/:id/memos', to: "memos#show"
 
   # Show memos based on ID
@@ -49,7 +51,7 @@ Rails.application.routes.draw do
   # Post memos to a game
   post '/games/:id/memos', to: "memos#create"
   # Delete memos 
-  delete '/games/:id/memos/:id', to: "memos#delete"
+  delete 'users/:id/games/:id/memos/:id', to: "memos#delete"
 
   root to: "main#index"
 

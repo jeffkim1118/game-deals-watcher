@@ -6,8 +6,8 @@ function Browse({currentUser}) {
     const [gameDealsList, setGameDealsList] = useState([]);
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [addedStatus, setStatus] = useState(false);
-    const [errorStatus, setErrorStatus] = useState(false);
+    const [addedStatus, setStatus] = useState();
+    // const [errorStatus, setErrorStatus] = useState(false);
 
     const fetchDeals = useCallback((queryObject) => {
         const url = new URL(`https://www.cheapshark.com/api/1.0/deals?sortBy=Price`);
@@ -60,7 +60,6 @@ function Browse({currentUser}) {
                 setStatus(true)
             }else{
                 setStatus(false)
-                setErrorStatus(true)
             }
         })
         .catch((error)=>console.log(error))
@@ -69,7 +68,7 @@ function Browse({currentUser}) {
     return(
         <div className="container-fluid">
             {addedStatus === true ? <div className="alert alert-success" role="alert">Added to wishlist</div> : null}
-            {errorStatus === true ? <div className="alert alert-danger" role="alert">Same game already exist in your wishlist!</div> : null}
+            {addedStatus === false ? <div className="alert alert-danger" role="alert">Same game already exist in your wishlist!</div> : null}
             <h1>Browse</h1>
             <h4>Filter:</h4>
             <input placeholder='Enter a Title' value={gameTitle} onChange={(e)=>setTitle(e.target.value)}></input>

@@ -1,5 +1,15 @@
 class MemosController < ApplicationController
     skip_before_action :authorized
+    def display_all_memos
+        memos = Memo.all
+        if memos
+            render json: memos
+        else
+            render json: {error: "No memos exist"}
+        end
+    end
+
+
     def show
         game = Game.find_by(id: params[:id])
         memos = game.memos
@@ -33,12 +43,7 @@ class MemosController < ApplicationController
     end
 
     def delete
-        user = User.find_by(id: session[:user_id])
-        games = user.games
-        game = games.find_by(id: params[:id])
-        # game = user.games.find_by(id: params[:id])
-        memo = game.memos.find_by(id: params[:memo_id])
-        byebug
+        memo = Memo.find_by(id: params[:id])
         if memo
             memo.delete
             render json: {}
