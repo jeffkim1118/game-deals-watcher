@@ -7,7 +7,6 @@ function Browse({currentUser}) {
     const [gameTitle, setTitle] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [addedStatus, setStatus] = useState();
-    // const [errorStatus, setErrorStatus] = useState(false);
 
     const fetchDeals = useCallback((queryObject) => {
         const url = new URL(`https://www.cheapshark.com/api/1.0/deals?sortBy=Price`);
